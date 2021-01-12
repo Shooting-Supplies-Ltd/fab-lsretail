@@ -93,7 +93,7 @@ const Products = (props) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Get Item Data
   const itemData = await getItems()
   const items = await itemData.data
