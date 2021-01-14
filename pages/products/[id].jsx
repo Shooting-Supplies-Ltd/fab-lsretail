@@ -91,9 +91,11 @@ const Product = (props) => {
 
   if (!item) {
     return (
-      <div className="mt-24 flex justify-center">
-        Loading..
+      <Layout>
+        <div className="mt-24 flex justify-center">
+          Loading..
       </div>
+      </Layout>
     )
   }
 
@@ -296,7 +298,8 @@ export async function getStaticProps({ params }) {
   console.log(params)
 
   return {
-    props: params
+    props: { params },
+    revalidate: 10
   }
 }
 
