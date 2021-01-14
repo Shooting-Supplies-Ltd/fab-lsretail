@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import { getCategories, getItems, getMatrixItems } from './api/lightspeed'
+import { getCategories, getItems, getMatrixItems } from '../api/lightspeed'
 import { FaArrowCircleUp } from 'react-icons/fa';
-import Layout from '../components/Layout'
-import ProductCard from '../components/ProductCard'
-import CategoryFilter from '../components/CategoryFilter'
-import MobileCategoryFilter from '../components/MobileCategoryFilter'
+import Layout from '../../components/Layout'
+import ProductCard from '../../components/ProductCard'
+import CategoryFilter from '../../components/CategoryFilter'
+import MobileCategoryFilter from '../../components/MobileCategoryFilter'
 
 const Products = (props) => {
   const { singleItems } = props

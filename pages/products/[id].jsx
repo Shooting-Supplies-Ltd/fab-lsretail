@@ -1,43 +1,69 @@
 import Link from 'next/link'
+import Head from 'next/head'
 import Image from 'next/image'
+
 import { useRouter } from 'next/router'
-import { getItem, getMatrixItem } from '../api/lightspeed'
 import { useState, useEffect, useRef } from 'react'
+
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
+
 import Layout from '../../components/Layout'
 import MatrixFilter from '../../components/product/MatrixFilter'
 import ProductImage from '../../components/product/ProductImage'
-import Head from 'next/head'
 
 const Product = (props) => {
+  // Get product id and matrix=true/false from router.
   const router = useRouter()
-  const { addItem, cartCount } = useShoppingCart()
-  // const Item = props.item.Item ? props.item.Item : props.item.ItemMatrix
-  const { Item } = props.item
-  const { ItemMatrix } = props.item
+  const { id, matrix } = router.query
+  console.log(id, matrix)
 
+  // Set const for useRef to prevent useEffect on page load where needed.
+  const loaded = useRef(false);
+
+  // Add the shopping cart utilities
+  const { addItem, cartCount } = useShoppingCart()
+
+  // State items
+  const [item, setItem] = useState()
+  const [image, setImage] = useState()
   const [checkedInputs, setCheckedInputs] = useState({})
-  const [image, setImage] = useState(
-    Item ? `${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`
-      : `${ItemMatrix.Images.Image.baseImageURL}/w_300/${ItemMatrix.Images.Image.publicID}.jpg`)
-  const [item, setItem] = useState(Item ? Item : ItemMatrix)
   const [matrixItemDetail, setMatrixItemDetail] = useState()
   const [matrixLoading, setMatrixLoading] = useState(false)
 
-  const handleInputChange = (event) => {
-    setCheckedInputs([event.target.value])
-  }
-
-  const loaded = useRef(false);
-
+  // Get initial product
   useEffect(() => {
-    if (Item) {
-      setItem(Item)
-    } else if (ItemMatrix) {
-      setItem(ItemMatrix)
+    const getMatrixItem = async (id) => {
+      const res = await fetch(`/api/matrixItem?itemID=${id}`)
+      const data = await res.json()
+      const matrixItem = data.ItemMatrix
+      setImage(matrixItem.Images ? `${matrixItem.Images.Image.baseImageURL}/w_300/${matrixItem.Images.Image.publicID}.jpg` : 'No Image Yet')
+      setItem(matrixItem)
     }
-  })
 
+    const getSingleItem = async (id) => {
+      const res = await fetch(`/api/item?itemID=${id}`)
+      const data = await res.json()
+
+      const singleItem = data.Item
+      setImage(singleItem.Images ? `${singleItem.Images.Image.baseImageURL}/w_300/${singleItem.Images.Image.publicID}.jpg` : 'No Image Yet')
+      setItem(singleItem)
+    }
+
+    if (matrix === "true") {
+      getMatrixItem(id)
+    }
+
+    if (matrix === undefined) {
+      getSingleItem(id)
+    }
+  }, [])
+
+  // Log product to console when added to state
+  useEffect(() => {
+    console.log(item)
+  }, [item])
+
+  // Get Matrix Item on checkedInputs change.
   useEffect(() => {
     async function getFabItem() {
       setMatrixLoading(true)
@@ -58,6 +84,19 @@ const Product = (props) => {
     console.log(matrixLoading)
   }, [matrixLoading])
 
+  // Handle matrix input
+  const handleInputChange = (event) => {
+    setCheckedInputs([event.target.value])
+  }
+
+  if (!item) {
+    return (
+      <div className="mt-24 flex justify-center">
+        Loading..
+      </div>
+    )
+  }
+
   const product = {
     name: item.description,
     description: item.ItemECommerce ? item.ItemECommerce.longDescription : '',
@@ -70,28 +109,20 @@ const Product = (props) => {
     unitPrice: item.Prices.ItemPrice[0].amount,
   }
 
-  function getSingleProductFromMatrix(id) {
-    const result = item.Items.Item.filter(obj => obj.itemID == id)
-    return {
-      name: result[0].description,
-      description: result[0].ItemECommerce ? result[0].ItemECommerce.longDescription : '',
-      shortDescription: result[0].ItemECommerce ? result[0].ItemECommerce.shortDescription : '',
-      sku: result[0].customSku,
-      price: result[0].Prices.ItemPrice[0].amount.replace('.', ''),
-      currency: 'GBP',
-      image: image,
-      itemID: result[0].itemID,
-      unitPrice: result[0].Prices.ItemPrice[0].amount,
-    }
-  }
-
-  if (!item) {
-    return (
-      <div className="mt-24 flex justify-center">
-        Something went wrong, please go back and try again.
-      </div>
-    )
-  }
+  // function getSingleProductFromMatrix(id) {
+  //   const result = item.Items.Item.filter(obj => obj.itemID == id)
+  //   return {
+  //     name: result[0].description,
+  //     description: result[0].ItemECommerce ? result[0].ItemECommerce.longDescription : '',
+  //     shortDescription: result[0].ItemECommerce ? result[0].ItemECommerce.shortDescription : '',
+  //     sku: result[0].customSku,
+  //     price: result[0].Prices.ItemPrice[0].amount.replace('.', ''),
+  //     currency: 'GBP',
+  //     image: image,
+  //     itemID: result[0].itemID,
+  //     unitPrice: result[0].Prices.ItemPrice[0].amount,
+  //   }
+  // }
 
   // Return Matrix Item
   if (item.itemMatrixID != 0) {
@@ -254,32 +285,18 @@ const Product = (props) => {
   }
 }
 
-export async function getServerSideProps(ctx) {
-  let { query: { slug } } = ctx
-  const id = slug ? parseInt(slug.split('-').pop()) : ctx.query.id
+export default Product
 
-  if (ctx.query.matrix === 'true') {
-    const data = await getMatrixItem(id)
-    const item = await data.data
-
-    return {
-      props: {
-        item,
-        id
-      }
-    }
-  }
-
-  const data = await getItem(id)
-  const item = await data.data
-
-  return {
-    props: {
-      item,
-      id
-    }
-  }
+export async function getStaticPaths() {
+  const paths = []
+  return { paths, fallback: true }
 }
 
-export default Product
+export async function getStaticProps({ params }) {
+  console.log(params)
+
+  return {
+    props: params
+  }
+}
 

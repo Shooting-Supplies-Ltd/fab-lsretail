@@ -10,7 +10,7 @@ const ProductCard = (props) => {
   return (
     <>
       <div className="mx-8 my-4 lg:mx-8 lg:my-4 lg:w-56 lg:overflow-hidden lg:flex lg:flex-col rounded shadow-lg border-2 hover:border-fabred" key={item.itemID ? item.itemID : item.itemMatrixID}>
-        <Link as={`/product/${slug}`} href={item.itemID ? `/product?slug=${slug}-${item.itemID}` : `/product?matrix=true&slug=${slug}-${item.itemMatrixID}`}>
+        <Link href={item.itemID ? `/products/[id]?item=${slug}&id=${item.itemID}` : `/products/[id]?matrix=true&item=${slug}&id=${item.itemMatrixID}`}>
           <a>
             <div className="flex justify-center lg:h-58 p-4 lg:object-center lg:object-scale-down">
               {item.Images &&
