@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 const Footer = () => {
@@ -21,7 +22,15 @@ const Footer = () => {
         <div className="hidden lg:grid lg:gap-2 lg:grid-cols-4">
           <div>
             <Link href="/">
-              <a><img src="/logos/FAB-logo.png" alt="FAB Defense Logo" width="100" className="mb-4" /></a>
+              <a>
+                {/* <img src="/logos/FAB-logo.webp" alt="FAB Defense Logo" width="100" className="mb-4" /> */}
+                <Image
+                  src="/logos/FAB-logo.webp"
+                  width={120}
+                  height={120}
+                  alt="FAB Defense Logo"
+                  className="mb-4" />
+              </a>
             </Link>
             <h3 className="font-bold">EXPECT MORE</h3>
             <p className="mt-2 pr-4">Leading in development of cutting edge tactical equipment and weapon accessories.</p>
