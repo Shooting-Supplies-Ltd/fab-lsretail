@@ -15,7 +15,6 @@ const Product = (props) => {
   // Get product id and matrix=true/false from router.
   const router = useRouter()
   const { id, matrix } = router.query
-  console.log(id, matrix)
 
   // Set const for useRef to prevent useEffect on page load where needed.
   const loaded = useRef(false);
@@ -60,7 +59,7 @@ const Product = (props) => {
 
   // Log product to console when added to state
   useEffect(() => {
-    console.log(item)
+    // console.log(item)
   }, [item])
 
   // Get Matrix Item on checkedInputs change.
@@ -81,7 +80,7 @@ const Product = (props) => {
   }, [checkedInputs])
 
   useEffect(() => {
-    console.log(matrixLoading)
+    // console.log(matrixLoading)
   }, [matrixLoading])
 
   // Handle matrix input
