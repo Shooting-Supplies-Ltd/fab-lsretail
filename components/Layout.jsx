@@ -8,6 +8,7 @@ const Layout = (props) => {
       <Head>
         <link rel="icon" href="/logos/FAB-logo.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script async src="https://ackee-k395.onrender.com/tracker.js" data-ackee-server="https://ackee-k395.onrender.com" data-ackee-domain-id="7a72aa2e-cdae-459d-92e6-4da4c37fc5e7"></script>
       </Head>
       <Nav />
       <div className="flex-grow">
