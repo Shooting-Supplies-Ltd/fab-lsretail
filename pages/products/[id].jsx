@@ -132,9 +132,9 @@ const Product = (props) => {
     return (
       <Layout>
         <Head>
-          <title>{product.name} - FAB Defense (UK)</title>
-          <meta name="description" content={product.description} />
-          <meta property="og:title" content={product.name} />
+          <title>{item.description} - FAB Defense (UK)</title>
+          <meta name="description" content={item.description} />
+          <meta property="og:title" content={item.description} />
           <meta property="og:description" content={product.description} />
           <meta property="og:image" content={product.image} />
         </Head>
@@ -217,8 +217,11 @@ const Product = (props) => {
     return (
       <Layout>
         <Head>
-          <title>{product.name} - FAB Defense (UK)</title>
-          <meta name="description" content={product.description} />
+          <title>{item.description} - FAB Defense (UK)</title>
+          <meta name="description" content={item.description} />
+          <meta property="og:title" content={item.description} />
+          <meta property="og:description" content={product.description} />
+          <meta property="og:image" content={product.image} />
         </Head>
         <div>
           <div className="lg:mx-60">
