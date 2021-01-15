@@ -29,7 +29,7 @@ const Nav = () => {
         <div className="lg:mx-48 lg:h-24 lg:flex lg:justify-between lg:items-center">
           <div className="p-4 flex justify-center lg:p-0 lg:block lg:w-1/3">
             <Link href="/">
-              <a><img src="/logos/FAB-logo.png" alt="FAB Defense Logo" width="120" className="lg:py-6 lg:mr-8" /></a>
+              <a><img src="/logos/FAB-logo.webp" alt="FAB Defense Logo" width="120" className="lg:py-6 lg:mr-8" /></a>
             </Link>
           </div>
           <div className="hidden lg:w-1/3 lg:flex lg:justify-center">
