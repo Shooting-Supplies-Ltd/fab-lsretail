@@ -69,7 +69,7 @@ const Product = (props) => {
       setMatrixLoading(true)
       const res = await fetch(`/api/item?itemID=${checkedInputs}`)
       const { Item } = await res.json()
-      setImage(Item.Images ? `${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg` : 'No Image Yet')
+      setImage(Item.Images ? `${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg` : "/loading.gif")
       setMatrixItemDetail(Item)
       setMatrixLoading(false)
     }
