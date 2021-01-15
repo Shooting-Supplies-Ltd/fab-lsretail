@@ -124,6 +124,8 @@ const Product = (props) => {
       itemID: result[0].itemID,
       unitPrice: result[0].Prices.ItemPrice[0].amount,
     }
+
+
   }
 
   // Return Matrix Item
