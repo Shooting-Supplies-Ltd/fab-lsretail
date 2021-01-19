@@ -27,7 +27,7 @@ const Nav = () => {
       </div>
       <div className="lg:h-24 bg-black lg:text-white">
         <div className="lg:mx-48 lg:h-24 lg:flex lg:justify-between lg:items-center">
-          <div className="p-4 flex justify-center lg:p-0 lg:block lg:w-1/3">
+          <div className="p-0 flex justify-center lg:block lg:w-1/3">
             <Link href="/">
               <a><img src="/logos/FAB-logo.webp" alt="FAB Defense Logo" width="120" className="lg:py-6 lg:mr-8" /></a>
             </Link>
@@ -59,7 +59,7 @@ const Nav = () => {
         <p>Free Delivery on Orders over £50</p>
       </div>
       <div className="p-2 bg-fabred text-white text-center lg:hidden">
-        <button onClick={() => setMenuToggle(!menuToggle)} className="font-bold uppercase">Menu</button>
+        <button onClick={() => setMenuToggle(!menuToggle)} className="w-full font-bold uppercase">Menu</button>
       </div>
       {menuToggle &&
         <div className="absolute z-10 bg-fabgrey w-full text-white">

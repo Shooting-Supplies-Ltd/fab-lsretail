@@ -2,8 +2,7 @@ import Image from 'next/image'
 
 const BannerBottom = () => {
   return (
-    <div className="mx-4 lg:mx-60 lg:my-12 lg:flex">
-      {/* <img src="banners/ruger-stock.png" alt="FAB Defense Superior Ergonomics & Ruger stock" className="px-12 my-12 lg:my-0 lg:p-0" /> */}
+    <div className="p-12 lg:p-0 mx-4 lg:mx-60 lg:my-12 lg:flex">
       <Image
         src="/banners/ruger-stock.png"
         width={900}
