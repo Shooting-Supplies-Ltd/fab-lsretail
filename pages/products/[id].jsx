@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import Image from 'next/image'
 
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
-import { getItem, getMatrixItem } from '../api/lightspeed'
+import { getItem, getItems, getMatrixItem } from '../api/lightspeed'
 
 import Layout from '../../components/Layout'
 import MatrixFilter from '../../components/product/MatrixFilter'
@@ -37,59 +36,7 @@ const Product = (props) => {
   useEffect(() => {
     setImage(`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`)
     setItem(Item)
-    // const getMatrixItem = async (id) => {
-    //   const res = await fetch(`/api/matrixItem?itemID=${id}`)
-    //   const data = await res.json()
-    //   const matrixItem = data.ItemMatrix
-    //   setImage(matrixItem.Images ? `${matrixItem.Images.Image.baseImageURL}/w_300/${matrixItem.Images.Image.publicID}.jpg` : 'No Image Yet')
-    //   setItem(matrixItem)
-    // }
-
-    // const getSingleItem = async (id) => {
-    //   const res = await fetch(`/api/item?itemID=${id}`)
-    //   const data = await res.json()
-
-    //   const singleItem = data.Item
-    //   setImage(singleItem.Images ? `${singleItem.Images.Image.baseImageURL}/w_300/${singleItem.Images.Image.publicID}.jpg` : 'No Image Yet')
-    //   setItem(singleItem)
-    // }
-
-    // if (matrix === "true") {
-    //   getMatrixItem(id)
-    // }
-
-    // if (matrix === undefined) {
-    //   getSingleItem(id)
-    // }
   }, [])
-
-  // Get initial product
-  // useEffect(() => {
-  //   const getMatrixItem = async (id) => {
-  //     const res = await fetch(`/api/matrixItem?itemID=${id}`)
-  //     const data = await res.json()
-  //     const matrixItem = data.ItemMatrix
-  //     setImage(matrixItem.Images ? `${matrixItem.Images.Image.baseImageURL}/w_300/${matrixItem.Images.Image.publicID}.jpg` : 'No Image Yet')
-  //     setItem(matrixItem)
-  //   }
-
-  //   const getSingleItem = async (id) => {
-  //     const res = await fetch(`/api/item?itemID=${id}`)
-  //     const data = await res.json()
-
-  //     const singleItem = data.Item
-  //     setImage(singleItem.Images ? `${singleItem.Images.Image.baseImageURL}/w_300/${singleItem.Images.Image.publicID}.jpg` : 'No Image Yet')
-  //     setItem(singleItem)
-  //   }
-
-  //   if (matrix === "true") {
-  //     getMatrixItem(id)
-  //   }
-
-  //   if (matrix === undefined) {
-  //     getSingleItem(id)
-  //   }
-  // }, [])
 
   // Log product to console when added to state
   useEffect(() => {
@@ -328,8 +275,26 @@ const Product = (props) => {
 export default Product
 
 export async function getStaticPaths() {
-  const paths = []
-  return { paths, fallback: true }
+  const res = await getItems()
+  const items = await res.data.Item
+  let IDs = []
+
+  items.map(item => {
+    if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
+      IDs.push(item.itemMatrixID)
+    }
+
+    if (item.itemMatrixID === '0') {
+      IDs.push(item.itemID)
+    }
+  })
+
+  const paths = IDs.map(id => ({
+    params: { id }
+  }))
+
+  // const paths = []
+  return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
@@ -339,18 +304,15 @@ export async function getStaticProps({ params }) {
   // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
   const res = await getItem(id)
   Item = await res.data.Item
-  console.log(Item)
 
   if (Item.manufacturerID === '55' && Item.itemMatrixID != '0') {
     const res = await getMatrixItem(id)
     Item = await res.data.ItemMatrix
-    console.log(Item)
   }
 
   if (Item.manufacturerID != '55') {
     const res = await getMatrixItem(id)
     Item = await res.data.ItemMatrix
-    console.log(Item)
   }
 
   return {
