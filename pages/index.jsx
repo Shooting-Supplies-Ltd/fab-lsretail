@@ -27,7 +27,7 @@ export default function Home() {
         This website uses cookies for functionality and user experience. <Link href="/privacy#cookies"><a><span className="underline">Learn More</span></a></Link>
       </CookieConsent>
       <main className="mx-12 my-12 lg:mx-60 lg:my-0 lg:mt-32 flex justify-center" id="modal">
-        <section className="grid grid-cols-3 gap-2">
+        <section className="grid grid-cols-2 lg:grid-cols-3 gap-2">
           <Image
             src="/products/FX-AG43B-Black.webp"
             width={250}
