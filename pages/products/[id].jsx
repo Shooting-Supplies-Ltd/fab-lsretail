@@ -120,9 +120,8 @@ const Product = (props) => {
           <meta name="og:image" content={product.image} />
         </Head>
         <div className="divide-y-4 divide-black divide-double">
-          <div className="mx-8 lg:my-20 lg:mx-60">
+          <div className="mx-8 my-12 lg:my-20 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
-
               <div className="flex justify-center">
                 {matrixLoading &&
                   <img src="/loading.gif" alt="Loading spinner" />
@@ -131,30 +130,29 @@ const Product = (props) => {
                   <ProductImage imageURL={image} />
                 }
               </div>
-
               <div>
                 <h1 className="font-black text-3xl uppercase">{product.name}</h1>
                 <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
                   value: product.price,
                   currency: product.currency,
                 })}</p>
-                <div className="lg:my-4 lg:font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
+                <div className="my-4 font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
                 {matrixItemDetail &&
-                  <p><span className="lg:font-medium">SKU: {matrixItemDetail.customSku}</span></p>
+                  <p><span className="font-medium">SKU: {matrixItemDetail.customSku}</span></p>
                 }
                 {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh > 0 &&
-                  <p><span className="lg:font-medium">STOCK:</span> <span className="lg:text-green-500 lg:font-medium lg:uppercase">Available</span></p>
+                  <p><span className="font-medium">STOCK:</span> <span className="text-green-500 font-medium uppercase">Available</span></p>
                 }
                 {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh == 0 &&
-                  <p><span className="lg:font-medium">STOCK:</span> <span className="lg:text-red-500 lg:font-medium lg:uppercase">Out of Stock</span></p>
+                  <p><span className="font-medium">STOCK:</span> <span className="text-red-500 font-medium uppercase">Out of Stock</span></p>
                 }
                 <MatrixFilter item={item} handleInputChange={handleInputChange} checkedInputs={checkedInputs} />
-                <div className="lg:mt-8">
+                <div className="mt-8">
                   {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh > 0 &&
                     <button
                       onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
                       aria-label={`Add ${product.name} to your cart`}
-                      className="p-2 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
+                      className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
                     >
                       Add to Cart
                 </button>
@@ -163,7 +161,7 @@ const Product = (props) => {
                     <button
                       onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
                       aria-label={`Add ${product.name} to your cart`}
-                      className="p-2 bg-fabgrey text-gray-400 font-bold rounded mr-2"
+                      className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
                       disabled
                     >
                       Add to Cart
@@ -171,16 +169,15 @@ const Product = (props) => {
                   }
                   {cartCount > 0 ? (
                     <Link href="/cart">
-                      <button className="p-2 bg-fabred text-white font-bold rounded">View Cart</button>
+                      <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
                     </Link>
                   ) : ''}
                 </div>
               </div>
             </div>
           </div>
-          <hr className="mt-12 lg:hidden" />
           <div className="mx-8 lg:mx-60 lg:my-20">
-            <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+            <h3 className="my-12 lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
             <section>
               <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
             </section>
@@ -202,7 +199,7 @@ const Product = (props) => {
           <meta name="og:image" content={product.image} />
         </Head>
         <div className="divide-y-4 divide-black divide-double">
-          <div className="mx-8 lg:my-20 lg:mx-60">
+          <div className="mx-8 my-12 lg:my-20 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
               <div className="flex justify-center">
                 <ProductImage imageURL={image} />
@@ -250,8 +247,8 @@ const Product = (props) => {
               </div>
             </div>
           </div>
-          <div className="mx-8 lg:mx-60 lg:my-20">
-            <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+          <div className="mx-8 my-8 lg:mx-60 lg:my-20">
+            <h3 className="my-12 lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
             <section>
               <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
             </section>
