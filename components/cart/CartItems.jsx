@@ -17,7 +17,7 @@ const CartForm = (props) => {
                   onClick={() => removeItem(cartDetails[item].sku)}
                   aria-label={`Remove ${cartDetails[item].name} from your cart`}
                 >
-                  <TiDelete size="1.5em" />
+                  <TiDelete size="2em" />
                 </button>
               }
               {cartDetails && cartDetails[item].itemID === 7051 &&

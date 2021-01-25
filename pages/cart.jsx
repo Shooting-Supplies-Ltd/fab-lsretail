@@ -140,9 +140,9 @@ const Cart = () => {
           </div>
         </div>
         <div className="mt-4 flex justify-end">
-          <button onClick={clearCookie} className="mt-4 bg-black text-white text-sm lg:text-base rounded p-2">Clear Cart</button>
+          <button onClick={clearCookie} className="mt-4 bg-black text-white text-sm lg:text-base rounded p-3">Clear Cart</button>
           {!loading &&
-            <button onClick={handleCheckout} className="ml-4 mt-4 bg-fabred focus:bg-fabgrey text-white text-sm lg:text-base rounded p-2">Pay Now</button>
+            <button onClick={handleCheckout} className="ml-4 mt-4 bg-green-500 focus:bg-fabgrey text-white text-sm lg:text-base rounded p-3">Pay Now</button>
           }
 
         </div>

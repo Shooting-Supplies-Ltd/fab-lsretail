@@ -163,7 +163,7 @@ const Product = (props) => {
                     <button
                       onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
                       aria-label={`Add ${product.name} to your cart`}
-                      className="lg:p-2 lg:bg-fabgrey lg:text-gray-400 lg:font-bold lg:rounded lg:mr-2"
+                      className="p-2 bg-fabgrey text-gray-400 font-bold rounded mr-2"
                       disabled
                     >
                       Add to Cart
@@ -226,7 +226,7 @@ const Product = (props) => {
                     <button
                       onClick={() => addItem(product)}
                       aria-label={`Add ${product.name} to your cart`}
-                      className="p-2 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
+                      className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
                     >
                       Add to Cart
                 </button>
@@ -235,7 +235,7 @@ const Product = (props) => {
                     <button
                       onClick={() => addItem(product)}
                       aria-label={`Add ${product.name} to your cart`}
-                      className="lg:p-2 lg:bg-fabgrey lg:text-gray-400 lg:font-bold lg:rounded lg:mr-2"
+                      className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
                       disabled
                     >
                       Add to Cart
@@ -243,7 +243,7 @@ const Product = (props) => {
                   }
                   {cartCount > 0 ? (
                     <Link href="/cart">
-                      <button className="p-2 bg-fabred text-white font-bold rounded">View Cart</button>
+                      <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
                     </Link>
                   ) : ''}
                 </div>

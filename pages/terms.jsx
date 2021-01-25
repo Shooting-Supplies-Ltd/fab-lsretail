@@ -14,14 +14,14 @@ const Terms = () => {
         <h2 className="mt-8 mb-4 font-black text-2xl">Links</h2>
         <h2 className="mt-4 mb-2 font-bold text-2xl">Terms & Conditions</h2>
         <ul>
-          <Link href="#about-us"><li><a className="text-fabred">About Us</a></li></Link>
-          <Link href="#contract"><li><a className="text-fabred">Make a contract with us</a></li></Link>
-          <Link href="#place-order"><li><a className="text-fabred">How to place an order</a></li></Link>
-          <Link href="#delivery"><li><a className="text-fabred">Delivery & Carriage Charges</a></li></Link>
-          <Link href="#cancellation"><li><a className="text-fabred">Cancellation & Returns</a></li></Link>
-          <Link href="#faulty"><li><a className="text-fabred">Faulty Goods</a></li></Link>
-          <Link href="#liability"><li><a className="text-fabred">Liability</a></li></Link>
-          <Link href="#trade"><li><a className="text-fabred">Trade</a></li></Link>
+          <Link href="#about-us"><a className="text-fabred"><li>About Us</li></a></Link>
+          <Link href="#contract"><a className="text-fabred"><li>Make a contract with us</li></a></Link>
+          <Link href="#place-order"><a className="text-fabred"><li>How to place an order</li></a></Link>
+          <Link href="#delivery"><a className="text-fabred"><li>Delivery & Carriage Charges</li></a></Link>
+          <Link href="#cancellation"><a className="text-fabred"><li>Cancellation & Returns</li></a></Link>
+          <Link href="#faulty"><a className="text-fabred"><li>Faulty Goods</li></a></Link>
+          <Link href="#liability"><a className="text-fabred"><li>Liability</li></a></Link>
+          <Link href="#trade"><a className="text-fabred"><li>Trade</li></a></Link>
         </ul>
         <h2 className="mt-4 mb-2 font-bold text-2xl">Website Disclaimer</h2>
         <ul>
