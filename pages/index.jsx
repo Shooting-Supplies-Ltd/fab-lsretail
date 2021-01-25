@@ -26,9 +26,8 @@ export default function Home() {
       >
         This website uses cookies for functionality and user experience. <Link href="/privacy#cookies"><a><span className="underline">Learn More</span></a></Link>
       </CookieConsent>
-      <main className="hidden lg:mx-60 lg:mt-32 lg:flex lg:justify-center" id="modal">
-        <section className="lg:grid lg:grid-cols-3 lg:gap-2">
-          {/* <div><img src="products/FX-AG43B-Black.jpg" alt="FAB Defense AG43B" width="300" /></div> */}
+      <main className="mx-12 my-12 lg:mx-60 lg:my-0 lg:mt-32 flex justify-center" id="modal">
+        <section className="grid grid-cols-3 gap-2">
           <Image
             src="/products/FX-AG43B-Black.webp"
             width={250}
@@ -66,7 +65,7 @@ export default function Home() {
             alt="FAB Defense USM" />
         </section>
       </main>
-      <div className="lg:my-40">
+      <div className="hidden lg:flex lg:my-40">
         <BannerBottom />
       </div>
     </Layout>
