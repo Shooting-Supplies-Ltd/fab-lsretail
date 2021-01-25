@@ -18,10 +18,10 @@ export default function Home() {
       </Head>
       <CookieConsent
         location="bottom"
-        buttonText="Okay"
+        buttonText="Accept"
         cookieName="fab-cart"
         style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+        buttonStyle={{ backgroundColor: "#FE0000", color: "#fff", fontSize: "16px", fontWeight: "700", borderRadius: "5px" }}
         expires={150}
       >
         This website uses cookies for functionality and user experience. <Link href="/privacy#cookies"><a><span className="underline">Learn More</span></a></Link>

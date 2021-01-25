@@ -204,8 +204,8 @@ const Product = (props) => {
           <meta name="og:description" content={product.description} />
           <meta name="og:image" content={product.image} />
         </Head>
-        <div>
-          <div className="mx-8 lg:mt-12 lg:mx-60">
+        <div className="divide-y-4 divide-black divide-dotted">
+          <div className="mx-8 lg:my-20 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
 
               <div className="flex justify-center">
@@ -255,12 +255,13 @@ const Product = (props) => {
               </div>
             </div>
           </div>
-
-          <div className="mx-8 mt-8 lg:mx-60 lg:mb-24 lg:mt-12 lg:p-4 lg:shadow-lg lg:rounded lg:max-w-full lg:h-auto lg:border-none">
-            <h3 className="lg:mx-4 lg:my-4 text-xl font-black">{product.name} FULL DESCRIPTION</h3>
-            <section>
-              <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
-            </section>
+          <div className="mx-8 lg:mx-60 lg:my-20">
+            <div>
+              <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+              <section>
+                <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+              </section>
+            </div>
           </div>
         </div>
       </Layout >

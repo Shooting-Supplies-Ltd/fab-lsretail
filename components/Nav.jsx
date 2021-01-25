@@ -36,7 +36,7 @@ const Nav = () => {
             <ul className="lg:flex lg:text-white lg:text-xl lg:font-black lg:space-x-16">
               <Link href="/products">
                 <a>
-                  <li className="lg:hover:text-fabred">PRODUCTS</li>
+                  <li className="lg:hover:text-fabred">SHOP</li>
                 </a>
               </Link>
               <Link href="/blog">
@@ -66,7 +66,7 @@ const Nav = () => {
           <ul className="text-center uppercase font-bold">
             <Link href="/products">
               <a>
-                <li className="p-4 border-b-2 border-b-white">Products</li>
+                <li className="p-4 border-b-2 border-b-white">Shop</li>
               </a>
             </Link>
             <Link href="/blog">
