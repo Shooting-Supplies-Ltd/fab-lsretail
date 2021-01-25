@@ -20,7 +20,7 @@ const Nav = () => {
           <div className="lg:w-1/2 lg:flex lg:justify-center">
             {/* <p>Shooting Supplies Ltd, All rights Reserved.</p> */}
           </div>
-          <div className="p-2 text-sm lg:w-1/2 flex justify-center lg:justify-end bg-fabgrey text-white">
+          <div className="p-2 text-xs lg:w-1/2 flex justify-center lg:justify-end bg-fabgrey text-white lg:text-sm">
             <p>Contact Us: <a href="tel:01527831261" className="hover:text-fabred">01527 831 261</a></p>
           </div>
         </div>
