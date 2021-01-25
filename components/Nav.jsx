@@ -58,7 +58,7 @@ const Nav = () => {
       <div className="p-2 lg:p-2 flex justify-center text-white bg-fabgrey text-xs lg:text-base">
         <p>Free Delivery on Orders over £50</p>
       </div>
-      <div className="p-2 bg-fabred text-white text-center lg:hidden">
+      <div className="p-4 bg-fabred text-white text-center lg:hidden">
         <button onClick={() => setMenuToggle(!menuToggle)} className="w-full font-bold uppercase">Menu</button>
       </div>
       {menuToggle &&

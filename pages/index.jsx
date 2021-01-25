@@ -33,31 +33,26 @@ export default function Home() {
             width={250}
             height={250}
             alt="FAB Defense AG43B" />
-          {/* <div><img src="products/FX-REGB-White.jpg" alt="" width="250" /></div> */}
           <Image
             src="/products/FX-REGB-White.webp"
             width={250}
             height={250}
             alt="FAB Defense FX REGB Ergonomic Grip" />
-          {/* <div><img src="products/FX-GLCOREB-DkGray.jpg" alt="" width="250" /></div> */}
           <Image
             src="/products/FX-GLCOREB-DkGray.webp"
             width={250}
             height={250}
             alt="FAB Defense GL Core B Buttstock" />
-          {/* <div><img src="products/FX-TPODG2B-Black.jpg" alt="" width="250" /></div> */}
           <Image
             src="/products/FX-TPODG2B-Black.webp"
             width={250}
             height={250}
             alt="FAB Defense FX TPOD Bipod" />
-          {/* <div><img src="products/FX-GLCORES-DkGray.jpg" alt="" width="250" /></div> */}
           <Image
             src="/products/FX-GLCORES-DkGray.webp"
             width={250}
             height={250}
             alt="FAB Defense GLCORE S Buttstock" />
-          {/* <div><img src="products/FX-USM-Red.jpg" alt="" width="250" /></div> */}
           <Image
             src="/products/FX-USM-Red.webp"
             width={250}
