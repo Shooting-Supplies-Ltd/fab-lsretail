@@ -33,7 +33,7 @@ const Nav = () => {
             </Link>
           </div>
           <div className="hidden lg:w-1/3 lg:flex lg:justify-center">
-            <ul className="lg:flex lg:text-white lg:text-2xl lg:font-black lg:space-x-16">
+            <ul className="lg:flex lg:text-white lg:text-xl lg:font-bold lg:space-x-16">
               <Link href="/products">
                 <a>
                   <li className="lg:hover:text-fabred">SHOP</li>
