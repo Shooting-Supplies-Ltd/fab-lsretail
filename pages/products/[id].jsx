@@ -119,11 +119,8 @@ const Product = (props) => {
           <meta name="og:description" content={product.description} />
           <meta name="og:image" content={product.image} />
         </Head>
-        <div>
-          <div className="lg:mx-60">
-            <button className="ml-2 mt-2 p-2 bg-black text-white text-sm rounded" onClick={() => router.back()}>Back</button>
-          </div>
-          <div className="mx-8 lg:mt-12 lg:mx-60">
+        <div className="divide-y-4 divide-black divide-double">
+          <div className="mx-8 lg:my-20 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
 
               <div className="flex justify-center">
@@ -182,10 +179,10 @@ const Product = (props) => {
             </div>
           </div>
           <hr className="mt-12 lg:hidden" />
-          <div className="mx-8 my-12 lg:mx-60 lg:mb-24 lg:mt-12 lg:p-4 lg:shadow-lg lg:rounded lg:max-w-full lg:h-auto lg:border-none">
-            <h3 className="lg:mx-4 my-4 text-2xl font-black">{product.name} FULL DESCRIPTION</h3>
+          <div className="mx-8 lg:mx-60 lg:my-20">
+            <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
             <section>
-              <div className="lg:mx-4 my-4 prose lg:font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+              <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
             </section>
           </div>
         </div>
@@ -204,14 +201,12 @@ const Product = (props) => {
           <meta name="og:description" content={product.description} />
           <meta name="og:image" content={product.image} />
         </Head>
-        <div className="divide-y-4 divide-black divide-dotted">
+        <div className="divide-y-4 divide-black divide-double">
           <div className="mx-8 lg:my-20 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
-
               <div className="flex justify-center">
                 <ProductImage imageURL={image} />
               </div>
-
               <div>
                 <h1 className="font-black text-3xl uppercase">{product.name}</h1>
                 <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
@@ -256,12 +251,10 @@ const Product = (props) => {
             </div>
           </div>
           <div className="mx-8 lg:mx-60 lg:my-20">
-            <div>
-              <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
-              <section>
-                <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
-              </section>
-            </div>
+            <h3 className="lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+            <section>
+              <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+            </section>
           </div>
         </div>
       </Layout >

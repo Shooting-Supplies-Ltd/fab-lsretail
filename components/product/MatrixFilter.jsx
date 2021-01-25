@@ -9,7 +9,7 @@ const MatrixFilter = (props) => {
         <option selected disabled>Choose Colour</option>
         {item.Items.Item.map(item => {
           return (
-            <option value={item.itemID} className="text-sm pointer" onSelect={checkedInputs[item.itemID]} key={item.itemID}>{item.description.split(' ').pop()}</option>
+            <option value={item.itemID} className="text-sm" onSelect={checkedInputs[item.itemID]} key={item.itemID}>{item.description.split(' ').pop()}</option>
           )
         })}
       </select>
