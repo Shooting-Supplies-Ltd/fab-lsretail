@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import CookieConsent from "react-cookie-consent";
 
 import Layout from '../components/Layout'
@@ -23,7 +24,7 @@ export default function Home() {
         buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
         expires={150}
       >
-        This website uses cookies for functionality and user experience.{" "}
+        This website uses cookies for functionality and user experience. <Link href="/privacy#cookies"><a><span className="underline">Learn More</span></a></Link>
       </CookieConsent>
       <main className="hidden lg:mx-60 lg:mt-32 lg:flex lg:justify-center" id="modal">
         <section className="lg:grid lg:grid-cols-3 lg:gap-2">
