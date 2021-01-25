@@ -248,9 +248,9 @@ const Product = (props) => {
             </div>
           </div>
           <div className="mx-8 my-8 lg:mx-60 lg:my-20">
-            <h3 className="my-12 lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+            <h3 className="mt-8 lg:mb-2 text-2xl font-black">DESCRIPTION</h3>
             <section>
-              <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+              <div className="my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
             </section>
           </div>
         </div>
