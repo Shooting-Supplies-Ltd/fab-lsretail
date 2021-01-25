@@ -11,9 +11,9 @@ const CategoryFilter = (props) => {
         <h5 className="mb-2 font-bold text-lg">Category</h5>
         {category.map(cat => {
           return (
-            <div key={cat.categoryID} className="p-2 lg:p-0" >
+            <div key={cat.categoryID} className="p-2 lg:p-0 hover:fabred" >
               <input type="checkbox" id={cat.categoryID} value={cat.categoryID} checked={checkedCategories[cat.name]} onChange={handleInputChange} />
-              <label key={cat.categoryID} className="ml-2 hover:fabred font-semibold" htmlFor={cat.categoryID}>{cat.name}</label>
+              <label key={cat.categoryID} className="ml-2" htmlFor={cat.categoryID}>{cat.name}</label>
             </div>
           )
         })}
