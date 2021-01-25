@@ -123,7 +123,7 @@ const Product = (props) => {
           <div className="lg:mx-60">
             <button className="ml-2 mt-2 p-2 bg-black text-white text-sm rounded" onClick={() => router.back()}>Back</button>
           </div>
-          <div className="mx-8 lg:mt-4 lg:mx-60">
+          <div className="mx-8 lg:mt-12 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
 
               <div className="flex justify-center">
@@ -205,15 +205,11 @@ const Product = (props) => {
           <meta name="og:image" content={product.image} />
         </Head>
         <div>
-          <div className="lg:mx-60">
-            <button className="ml-2 mt-2 p-2 bg-black text-white text-sm rounded" onClick={() => router.back()}>Back</button>
-          </div>
-          <div className="mx-8 lg:mt-4 lg:mx-60">
+          <div className="mx-8 lg:mt-12 lg:mx-60">
             <div className="lg:grid lg:grid-cols-2 lg:gap-1">
 
               <div className="flex justify-center">
                 <ProductImage imageURL={image} />
-                {/* <img src={product.image} alt={`Image of the ${product.name}`} width="420" className="p-4 shadow-lg rounded max-w-full h-auto align-middle border-none" /> */}
               </div>
 
               <div>
