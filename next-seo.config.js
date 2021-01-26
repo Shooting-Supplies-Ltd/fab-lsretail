@@ -6,7 +6,7 @@ export default {
   },
   twitter: {
     handle: '@shootingsupplys',
-    site: '@https://fabdefense.co.uk',
+    site: 'https://fabdefense.co.uk',
     cardType: 'summary_large_image',
   },
 }
