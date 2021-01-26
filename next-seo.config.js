@@ -5,7 +5,7 @@ export default {
     site_name: 'FAB Defense',
   },
   twitter: {
-    handle: '@fabdefense',
+    handle: '@shootingsupplys',
     site: '@https://fabdefense.co.uk',
     cardType: 'summary_large_image',
   },
