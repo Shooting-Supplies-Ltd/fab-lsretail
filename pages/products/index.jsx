@@ -42,7 +42,7 @@ const Products = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout title="Products">
       <Head>
         <title>Products - FAB Defense (UK)</title>
         <meta name="description" content="FAB Defense Products | Bipods, Grips & More" />

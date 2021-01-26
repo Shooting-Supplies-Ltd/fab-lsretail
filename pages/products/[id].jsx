@@ -1,9 +1,7 @@
 import Link from 'next/link'
-import Head from 'next/head'
 
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
-
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 import { getItem, getItems, getMatrixItem } from '../api/lightspeed'
@@ -12,12 +10,60 @@ import Layout from '../../components/Layout'
 import MatrixFilter from '../../components/product/MatrixFilter'
 import ProductImage from '../../components/product/ProductImage'
 
+import { NextSeo } from 'next-seo'
+
+export async function getStaticPaths() {
+  const res = await getItems()
+  const items = await res.data.Item
+  let IDs = []
+
+  items.map(item => {
+    if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
+      IDs.push(item.itemMatrixID)
+    }
+
+    if (item.itemMatrixID === '0') {
+      IDs.push(item.itemID)
+    }
+  })
+
+  const paths = IDs.map(id => ({
+    params: { id }
+  }))
+
+  // const paths = []
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  const { id } = params
+  let Item
+
+  // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
+  const res = await getItem(id)
+  Item = await res.data.Item
+
+  if (Item.manufacturerID === '55' && Item.itemMatrixID != '0') {
+    const res = await getMatrixItem(id)
+    Item = await res.data.ItemMatrix
+  }
+
+  if (Item.manufacturerID != '55') {
+    const res = await getMatrixItem(id)
+    Item = await res.data.ItemMatrix
+  }
+
+  return {
+    props: { Item, params },
+    revalidate: 10
+  }
+}
+
 const Product = (props) => {
   // Get product id and matrix=true/false from router.
   const router = useRouter()
   const { id, matrix } = router.query
   const { Item, params } = props
-  console.log(Item)
 
   // Set const for useRef to prevent useEffect on page load where needed.
   const loaded = useRef(false);
@@ -40,7 +86,7 @@ const Product = (props) => {
 
   // Log product to console when added to state
   useEffect(() => {
-    console.log({ item })
+    // console.log({ item })
   }, [item])
 
   // Get Matrix Item on checkedInputs change.
@@ -104,207 +150,179 @@ const Product = (props) => {
       itemID: result[0].itemID,
       unitPrice: result[0].Prices.ItemPrice[0].amount,
     }
-
-
   }
 
   // Return Matrix Item
   if (item.itemMatrixID != 0) {
     return (
-      <Layout>
-        <Head>
-          <title>{item.description} - FAB Defense (UK)</title>
-          <meta name="description" content={item.description} />
-          <meta name="og:title" content={item.description} />
-          <meta name="og:description" content={product.description} />
-          <meta name="og:image" content={product.image} />
-        </Head>
-        <div className="divide-y-4 divide-black divide-double">
-          <div className="mx-8 my-12 lg:my-20 lg:mx-60">
-            <div className="lg:grid lg:grid-cols-2 lg:gap-1">
-              <div className="flex justify-center">
-                {matrixLoading &&
-                  <img src="/loading.gif" alt="Loading spinner" />
-                }
-                {!matrixLoading &&
-                  <ProductImage imageURL={image} />
-                }
-              </div>
-              <div>
-                <h1 className="font-black text-3xl uppercase">{product.name}</h1>
-                <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
-                  value: product.price,
-                  currency: product.currency,
-                })}</p>
-                <div className="my-4 font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
-                {matrixItemDetail &&
-                  <p><span className="font-medium">SKU: {matrixItemDetail.customSku}</span></p>
-                }
-                {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh > 0 &&
-                  <p><span className="font-medium">STOCK:</span> <span className="text-green-500 font-medium uppercase">Available</span></p>
-                }
-                {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh == 0 &&
-                  <p><span className="font-medium">STOCK:</span> <span className="text-red-500 font-medium uppercase">Out of Stock</span></p>
-                }
-                <MatrixFilter item={item} handleInputChange={handleInputChange} checkedInputs={checkedInputs} />
-                <div className="mt-8">
+      <>
+        <NextSeo
+          title={`${product.name}`}
+          description={product.shortDescription}
+          openGraph={{
+            title: `${product.name}`,
+            description: `${product.shortDescription}`,
+            images: [
+              {
+                url: `${image}`,
+                width: 800,
+                height: 600,
+                alt: `Image of ${product.name}`,
+              }
+            ],
+          }}
+        />
+        <Layout title={product.name} description={product.shortDescription} image={product.image}>
+          <div className="divide-y-4 divide-black divide-double">
+            <div className="mx-8 my-12 lg:my-20 lg:mx-60">
+              <div className="lg:grid lg:grid-cols-2 lg:gap-2">
+                <div className="flex justify-center h-full w-full object-cover">
+                  {matrixLoading &&
+                    <img src="/loading.gif" alt="Loading spinner" />
+                  }
+                  {!matrixLoading &&
+                    <ProductImage imageURL={image} />
+                  }
+                </div>
+                <div>
+                  <h1 className="font-black text-3xl uppercase">{product.name}</h1>
+                  <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
+                    value: product.price,
+                    currency: product.currency,
+                  })}</p>
+                  <div className="my-4 font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
+                  {matrixItemDetail &&
+                    <p><span className="font-medium">SKU: {matrixItemDetail.customSku}</span></p>
+                  }
                   {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh > 0 &&
-                    <button
-                      onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
-                      aria-label={`Add ${product.name} to your cart`}
-                      className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
-                    >
-                      Add to Cart
-                </button>
+                    <p><span className="font-medium">STOCK:</span> <span className="text-green-500 font-medium uppercase">Available</span></p>
                   }
                   {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh == 0 &&
-                    <button
-                      onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
-                      aria-label={`Add ${product.name} to your cart`}
-                      className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
-                      disabled
-                    >
-                      Add to Cart
-                </button>
+                    <p><span className="font-medium">STOCK:</span> <span className="text-red-500 font-medium uppercase">Out of Stock</span></p>
                   }
-                  {cartCount > 0 ? (
-                    <Link href="/cart">
-                      <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
-                    </Link>
-                  ) : ''}
+                  <MatrixFilter item={item} handleInputChange={handleInputChange} checkedInputs={checkedInputs} />
+                  <div className="mt-8">
+                    {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh > 0 &&
+                      <button
+                        onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
+                        aria-label={`Add ${product.name} to your cart`}
+                        className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
+                      >
+                        Add to Cart
+                </button>
+                    }
+                    {matrixItemDetail && matrixItemDetail.ItemShops.ItemShop[0].qoh == 0 &&
+                      <button
+                        onClick={() => addItem(getSingleProductFromMatrix(checkedInputs))}
+                        aria-label={`Add ${product.name} to your cart`}
+                        className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
+                        disabled
+                      >
+                        Add to Cart
+                </button>
+                    }
+                    {cartCount > 0 ? (
+                      <Link href="/cart">
+                        <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
+                      </Link>
+                    ) : ''}
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="mx-8 lg:mx-60 lg:my-20">
+              <h3 className="my-12 lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
+              <section>
+                <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+              </section>
+            </div>
           </div>
-          <div className="mx-8 lg:mx-60 lg:my-20">
-            <h3 className="my-12 lg:mx-4 lg:my-12 text-2xl font-black">DESCRIPTION</h3>
-            <section>
-              <div className="lg:mx-4 my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
-            </section>
-          </div>
-        </div>
-      </Layout>
+        </Layout>
+      </>
     )
   }
 
   // Return Single Item
   if (item.itemMatrixID == 0) {
     return (
-      <Layout>
-        <Head>
-          <title>{item.description} - FAB Defense (UK)</title>
-          <meta name="description" content={item.description} />
-          <meta name="og:title" content={item.description} />
-          <meta name="og:description" content={product.description} />
-          <meta name="og:image" content={product.image} />
-        </Head>
-        <div className="divide-y-4 divide-black divide-double">
-          <div className="mx-8 my-12 lg:my-20 lg:mx-60">
-            <div className="lg:grid lg:grid-cols-2 lg:gap-1">
-              <div className="flex justify-center">
-                <ProductImage imageURL={image} />
-              </div>
-              <div>
-                <h1 className="font-black text-3xl uppercase">{product.name}</h1>
-                <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
-                  value: product.price,
-                  currency: product.currency,
-                })}</p>
-                <div className="my-4 font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
-                <p><span className="font-medium">SKU:</span>{product.sku}</p>
-                {item.ItemShops.ItemShop[0].qoh > 0 &&
-                  (<p><span className="font-medium">STOCK:</span> <span className="text-green-500 font-medium uppercase">Available</span></p>)
-                }
-                {item.ItemShops.ItemShop[0].qoh == 0 &&
-                  (<p><span className="font-medium">STOCK:</span> <span className="text-red-500 font-medium uppercase">Out of Stock</span></p>)
-                }
-                <div className="mt-8">
+      <>
+        <NextSeo
+          title={`${product.name}`}
+          description={product.shortDescription}
+          openGraph={{
+            title: `${product.name}`,
+            description: `${product.shortDescription}`,
+            images: [
+              {
+                url: `${image}`,
+                width: 800,
+                height: 600,
+                alt: `Image of ${product.name}`,
+              }
+            ],
+          }}
+        />
+        <Layout title={product.name} description={product.shortDescription} image={product.image}>
+          <div className="divide-y-4 divide-black divide-double">
+            <div className="mx-8 my-12 lg:my-20 lg:mx-60">
+              <div className="lg:grid lg:grid-cols-2 lg:gap-1">
+                <div className="flex justify-center">
+                  <ProductImage imageURL={image} />
+                </div>
+                <div>
+                  <h1 className="font-black text-3xl uppercase">{product.name}</h1>
+                  <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
+                    value: product.price,
+                    currency: product.currency,
+                  })}</p>
+                  <div className="my-4 font-medium" dangerouslySetInnerHTML={{ __html: product.shortDescription }}></div>
+                  <p><span className="font-medium">SKU:</span>{product.sku}</p>
                   {item.ItemShops.ItemShop[0].qoh > 0 &&
-                    <button
-                      onClick={() => addItem(product)}
-                      aria-label={`Add ${product.name} to your cart`}
-                      className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
-                    >
-                      Add to Cart
-                </button>
+                    (<p><span className="font-medium">STOCK:</span> <span className="text-green-500 font-medium uppercase">Available</span></p>)
                   }
                   {item.ItemShops.ItemShop[0].qoh == 0 &&
-                    <button
-                      onClick={() => addItem(product)}
-                      aria-label={`Add ${product.name} to your cart`}
-                      className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
-                      disabled
-                    >
-                      Add to Cart
-                </button>
+                    (<p><span className="font-medium">STOCK:</span> <span className="text-red-500 font-medium uppercase">Out of Stock</span></p>)
                   }
-                  {cartCount > 0 ? (
-                    <Link href="/cart">
-                      <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
-                    </Link>
-                  ) : ''}
+                  <div className="mt-8">
+                    {item.ItemShops.ItemShop[0].qoh > 0 &&
+                      <button
+                        onClick={() => addItem(product)}
+                        aria-label={`Add ${product.name} to your cart`}
+                        className="p-3 bg-fabred focus:bg-red-400 text-white font-bold rounded mr-2"
+                      >
+                        Add to Cart
+                </button>
+                    }
+                    {item.ItemShops.ItemShop[0].qoh == 0 &&
+                      <button
+                        onClick={() => addItem(product)}
+                        aria-label={`Add ${product.name} to your cart`}
+                        className="p-3 bg-fabgrey text-gray-400 font-bold rounded mr-2"
+                        disabled
+                      >
+                        Add to Cart
+                </button>
+                    }
+                    {cartCount > 0 ? (
+                      <Link href="/cart">
+                        <button className="p-3 bg-fabred text-white font-bold rounded">View Cart</button>
+                      </Link>
+                    ) : ''}
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="mx-8 my-8 lg:mx-60 lg:my-20">
+              <h3 className="mt-8 lg:mb-2 text-2xl font-black">DESCRIPTION</h3>
+              <section>
+                <div className="my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
+              </section>
+            </div>
           </div>
-          <div className="mx-8 my-8 lg:mx-60 lg:my-20">
-            <h3 className="mt-8 lg:mb-2 text-2xl font-black">DESCRIPTION</h3>
-            <section>
-              <div className="my-4 prose font-medium" dangerouslySetInnerHTML={{ __html: product.description }}></div>
-            </section>
-          </div>
-        </div>
-      </Layout >
+        </Layout >
+      </>
     )
   }
 }
 
 export default Product
-
-export async function getStaticPaths() {
-  const res = await getItems()
-  const items = await res.data.Item
-  let IDs = []
-
-  items.map(item => {
-    if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
-      IDs.push(item.itemMatrixID)
-    }
-
-    if (item.itemMatrixID === '0') {
-      IDs.push(item.itemID)
-    }
-  })
-
-  const paths = IDs.map(id => ({
-    params: { id }
-  }))
-
-  // const paths = []
-  return { paths, fallback: false }
-}
-
-export async function getStaticProps({ params }) {
-  const { id } = params
-  let Item
-
-  // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
-  const res = await getItem(id)
-  Item = await res.data.Item
-
-  if (Item.manufacturerID === '55' && Item.itemMatrixID != '0') {
-    const res = await getMatrixItem(id)
-    Item = await res.data.ItemMatrix
-  }
-
-  if (Item.manufacturerID != '55') {
-    const res = await getMatrixItem(id)
-    Item = await res.data.ItemMatrix
-  }
-
-  return {
-    props: { Item, params },
-    revalidate: 10
-  }
-}
-

@@ -99,8 +99,6 @@ ResultPage.getInitialProps = async ({ query, req }) => {
       )
     })
 
-    console.log({ emailLineItems })
-
     try {
       const res = fetch('https://api.sendinblue.com/v3/smtp/email', {
         method: 'POST',
