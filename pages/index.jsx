@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import CookieConsent from "react-cookie-consent";
@@ -8,6 +9,13 @@ import BannerBottom from '../components/BannerBottom'
 export default function Home() {
   return (
     <Layout>
+      <Head>
+        <title>FAB Defense (UK)</title>
+        <meta name="description" content="FAB Defense | Expect More" />
+        <meta property="og:title" content="FAB Defense (UK)" />
+        <meta property="og:description" content="FAB Defense | Expect More" />
+        <meta property="og:image" content="/logos/FAB-logo.png" />
+      </Head>
       <CookieConsent
         location="bottom"
         buttonText="Accept"
