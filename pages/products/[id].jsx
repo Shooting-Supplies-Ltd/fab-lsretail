@@ -164,7 +164,7 @@ const Product = (props) => {
           <meta property="og:title" content={`${item.description}`}></meta>
           <meta property="og:description" content={item.description}></meta>
           <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${item.description}`}></meta>
-          <meta property="og:url" content="https://fabdefense.co.uk"></meta>
+          <meta property="og:url" content={`https://fabdefense.co.uk${router.asPath}`}></meta>
           <meta name="twitter:card" content="summary_large_image"></meta>
           <meta charSet="UTF-8"></meta>
         </Head>
@@ -249,7 +249,7 @@ const Product = (props) => {
           <meta property="og:title" content={`${item.description}`}></meta>
           <meta property="og:description" content={item.description}></meta>
           <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${item.description}`}></meta>
-          <meta property="og:url" content="https://fabdefense.co.uk"></meta>
+          <meta property="og:url" content={`https://fabdefense.co.uk${router.asPath}`}></meta>
           <meta name="twitter:card" content="summary_large_image"></meta>
           <meta charSet="UTF-8"></meta>
         </Head>
