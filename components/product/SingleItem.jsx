@@ -42,7 +42,7 @@ const SingleItem = ({ item }) => {
         <div className="mx-8 my-12 lg:my-20 lg:mx-60">
           <div className="flex justify-center">
             <div className="w-1/2 p-2 flex justify-center">
-              <ProductImage imageURL={`${item.Images.Image.baseImageURL}/w_600/${item.Images.Image.publicID}.jpg`} />
+              <ProductImage imageURL={`${item.Images.Image.baseImageURL}/w_300/${item.Images.Image.publicID}.jpg`} />
             </div>
             <div className="w-1/2 p-2">
               <h1 className="font-black text-3xl uppercase">{item.description}</h1>

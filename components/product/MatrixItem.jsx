@@ -49,7 +49,7 @@ const MatrixItem = ({ item, matrixItem, image, matrixLoading, handleInputChange,
                 <img src="/loading.gif" alt="Loading spinner" />
               }
               {!matrixLoading &&
-                <ProductImage imageURL={matrixItem ? `${matrixItem.Images.Image.baseImageURL}/w_600/${matrixItem.Images.Image.publicID}.jpg` : `${item.Images.Image.baseImageURL}/w_600/${item.Images.Image.publicID}.jpg`} />
+                <ProductImage imageURL={matrixItem ? `${matrixItem.Images.Image.baseImageURL}/w_300/${matrixItem.Images.Image.publicID}.jpg` : `${item.Images.Image.baseImageURL}/w_300/${item.Images.Image.publicID}.jpg`} />
               }
             </div>
             <div className="w-1/2 p-2">
