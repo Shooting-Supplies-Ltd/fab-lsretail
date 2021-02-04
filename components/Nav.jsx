@@ -64,7 +64,7 @@ const Nav = () => {
       {menuToggle &&
         <div className="absolute z-10 bg-fabgrey w-full text-white">
           <ul className="text-center uppercase font-bold">
-            <Link href="/products">
+            <Link href="/shop">
               <a>
                 <li className="p-4 border-b-2 border-b-white">Shop</li>
               </a>
