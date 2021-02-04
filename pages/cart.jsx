@@ -5,7 +5,6 @@ import CartItems from '../components/cart/CartItems'
 import { setCookie, destroyCookie } from 'nookies'
 import Layout from '../components/Layout'
 import Head from 'next/head'
-import { RewindDimensions } from '@styled-icons/boxicons-regular/Rewind'
 
 const Cart = () => {
   const [loading, setLoading] = useState(false)
