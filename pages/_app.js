@@ -1,4 +1,5 @@
 import Router from 'next/router';
+import withYM from "next-ym";
 import { CartProvider } from 'use-shopping-cart'
 import { loadStripe } from '@stripe/stripe-js'
 import NProgress from 'nprogress';
@@ -30,4 +31,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default withYM("71925202", Router)(MyApp);
