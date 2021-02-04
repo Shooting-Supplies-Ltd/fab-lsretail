@@ -156,14 +156,14 @@ const Product = (props) => {
     return (
       <Layout>
         <Head>
-          <title className="uppercase">{`${item.description} | FAB Defense (UK)`}</title>
-          <meta name="description" content={item.description}></meta>
+          <title className="uppercase">{`${Item.description} | FAB Defense (UK)`}</title>
+          <meta name="description" content={Item.description}></meta>
           <meta name="robots" content="index, follow"></meta>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-          <meta name="keywords" content={`fab defense, ${item.description.replace(' ', ',')}`}></meta>
-          <meta property="og:title" content={`${item.description}`}></meta>
-          <meta property="og:description" content={item.description}></meta>
-          <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${item.description}`}></meta>
+          <meta name="keywords" content={`fab defense, ${Item.description.replace(' ', ',')}`}></meta>
+          <meta property="og:title" content={`${Item.description}`}></meta>
+          <meta property="og:description" content={Item.description}></meta>
+          <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${Item.description}`}></meta>
           <meta property="og:url" content={`https://fabdefense.co.uk${router.asPath}`}></meta>
           <meta name="twitter:card" content="summary_large_image"></meta>
           <meta charSet="UTF-8"></meta>
@@ -241,14 +241,14 @@ const Product = (props) => {
     return (
       <Layout>
         <Head>
-          <title className="uppercase">{`${item.description} | FAB Defense (UK)`}</title>
-          <meta name="description" content={item.description}></meta>
+          <title className="uppercase">{`${Item.description} | FAB Defense (UK)`}</title>
+          <meta name="description" content={Item.description}></meta>
           <meta name="robots" content="index, follow"></meta>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-          <meta name="keywords" content={`fab defense, ${item.description.replace(' ', ',')}`}></meta>
-          <meta property="og:title" content={`${item.description}`}></meta>
-          <meta property="og:description" content={item.description}></meta>
-          <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${item.description}`}></meta>
+          <meta name="keywords" content={`fab defense, ${Item.description.replace(' ', ',')}`}></meta>
+          <meta property="og:title" content={`${Item.description}`}></meta>
+          <meta property="og:description" content={Item.description}></meta>
+          <meta property="og:image" content={`${Item.Images.Image.baseImageURL}/w_300/${Item.Images.Image.publicID}.jpg`} alt={`${Item.description}`}></meta>
           <meta property="og:url" content={`https://fabdefense.co.uk${router.asPath}`}></meta>
           <meta name="twitter:card" content="summary_large_image"></meta>
           <meta charSet="UTF-8"></meta>

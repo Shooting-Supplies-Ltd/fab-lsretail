@@ -10,16 +10,22 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title className="uppercase">FAB Defense (UK)</title>
+        <title className="uppercase">FAB Defense (UK) | Pistol Grips, Buttstocks & More</title>
+        <link rel="canonical" href="https://fabdefense.co.uk" />
         <meta name="description" content="High Quality Gun Accessories | Buttstocks | Pistol Grips & More"></meta>
         <meta name="robots" content="index, follow"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta name="keywords" content="fab defense, buttstocks, grips, gun accessories, rifle accessories, pistol accessories, hand guards"></meta>
-        <meta property="og:title" content="FAB Defense (UK) Ltd"></meta>
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:title" content="FAB Defense (UK) | Pistol Grips, Buttstocks & More"></meta>
+        <meta property="og:site_name" content="FAB Defense (UK)"></meta>
         <meta property="og:description" content="High Quality Gun Accessories | Buttstocks | Pistol Grips & More"></meta>
         <meta property="og:image" content="/logos/FAB-logo.webp" alt="FAB Defense | Expect More"></meta>
         <meta property="og:url" content="https://fabdefense.co.uk"></meta>
+        <meta property="og:locale" content="en_GB"></meta>
+        <meta property="article:publisher" content="https://www.facebook.com/ShootingSuppliesLTD"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta name="twitter:site" content="@shootbromsgrove"></meta>
         <meta charSet="UTF-8"></meta>
       </Head>
       <CookieConsent
