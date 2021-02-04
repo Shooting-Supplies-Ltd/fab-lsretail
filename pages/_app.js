@@ -1,14 +1,11 @@
 import Router from 'next/router';
 import { CartProvider } from 'use-shopping-cart'
 import { loadStripe } from '@stripe/stripe-js'
-import { DefaultSeo } from 'next-seo'
 import NProgress from 'nprogress';
 
 import '../style/nprogress.css';
 import '../style/index.css'
 require("typeface-montserrat");
-
-import SEO from '../next-seo.config'
 
 // Router events.
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -28,7 +25,6 @@ function MyApp({ Component, pageProps }) {
       allowedCountries={['GB']}
       billingAddressCollection={true}
     >
-      <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </CartProvider>
   )

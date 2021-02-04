@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { getCategories, getItems, getMatrixItems } from '../api/lightspeed'
 import { FaArrowCircleUp } from 'react-icons/fa';
+
 import Layout from '../../components/Layout'
 import ProductCard from '../../components/ProductCard'
 import CategoryFilter from '../../components/CategoryFilter'
@@ -44,11 +45,17 @@ const Products = (props) => {
   return (
     <Layout title="Products">
       <Head>
-        <title>Products - FAB Defense (UK)</title>
-        <meta name="description" content="FAB Defense Products | Bipods, Grips & More" />
-        <meta property="og:title" content="Products - FAB Defense (UK)" />
-        <meta property="og:description" content="FAB Defense Products | Bipods, Grips & More" />
-        <meta property="og:image" content="/logos/FAB-logo.png" />
+        <title>Shop | FAB Defense (UK)</title>
+        <meta name="description" content="Shop FAB Defense Products, Filter by Category"></meta>
+        <meta name="robots" content="index, follow"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta name="keywords" content="fab defense, buttstocks, mounts, rails, grips, foregrips, gun accessories, rifle accessories, pistol accessories, hand guards"></meta>
+        <meta property="og:title" content="Shop | FAB Defense (UK) Ltd"></meta>
+        <meta property="og:description" content="Shop FAB Defense Products, Filter by Category"></meta>
+        <meta property="og:image" content="/logos/FAB-logo.webp" alt="FAB Defense | Expect More"></meta>
+        <meta property="og:url" content="https://fabdefense.co.uk/products"></meta>
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta charSet="UTF-8"></meta>
       </Head>
       <div className="lg:flex lg:mx-60 lg:mt-8">
         <FaArrowCircleUp

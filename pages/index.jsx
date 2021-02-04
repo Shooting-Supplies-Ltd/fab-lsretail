@@ -10,11 +10,17 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>FAB Defense (UK)</title>
-        <meta name="description" content="FAB Defense | Expect More" />
-        <meta property="og:title" content="FAB Defense (UK)" />
-        <meta property="og:description" content="FAB Defense | Expect More" />
-        <meta property="og:image" content="/logos/FAB-logo.png" />
+        <title className="uppercase">FAB Defense (UK)</title>
+        <meta name="description" content="High Quality Gun Accessories | Buttstocks | Pistol Grips & More"></meta>
+        <meta name="robots" content="index, follow"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta name="keywords" content="fab defense, buttstocks, grips, gun accessories, rifle accessories, pistol accessories, hand guards"></meta>
+        <meta property="og:title" content="FAB Defense (UK) Ltd"></meta>
+        <meta property="og:description" content="High Quality Gun Accessories | Buttstocks | Pistol Grips & More"></meta>
+        <meta property="og:image" content="/logos/FAB-logo.webp" alt="FAB Defense | Expect More"></meta>
+        <meta property="og:url" content="https://fabdefense.co.uk"></meta>
+        <meta name="twitter:card" content="summary_large_image"></meta>
+        <meta charSet="UTF-8"></meta>
       </Head>
       <CookieConsent
         location="bottom"
