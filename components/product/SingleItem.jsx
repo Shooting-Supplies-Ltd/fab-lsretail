@@ -26,6 +26,7 @@ const SingleItem = ({ item }) => {
     <Layout>
       <Head>
         <title className="uppercase">{`${item.description} | FAB Defense (UK)`}</title>
+        <link rel="canonical" href={`https://fabdefense.co.uk${router.asPath}`} />
         <meta name="description" content={item.description}></meta>
         <meta name="robots" content="index, follow"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>

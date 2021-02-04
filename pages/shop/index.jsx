@@ -46,14 +46,15 @@ const Products = (props) => {
     <Layout title="Products">
       <Head>
         <title>Shop | FAB Defense (UK)</title>
-        <meta name="description" content="Shop FAB Defense Products, Filter by Category"></meta>
+        <link rel="canonical" href="https://fabdefense.co.uk/shop" />
+        <meta name="description" content="Shop FAB Defense Grips & Accessories, Filter by Category"></meta>
         <meta name="robots" content="index, follow"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta name="keywords" content="fab defense, buttstocks, mounts, rails, grips, foregrips, gun accessories, rifle accessories, pistol accessories, hand guards"></meta>
         <meta property="og:title" content="Shop | FAB Defense (UK) Ltd"></meta>
-        <meta property="og:description" content="Shop FAB Defense Products, Filter by Category"></meta>
+        <meta property="og:description" content="Shop FAB Defense Grips & Accessories, Filter by Category"></meta>
         <meta property="og:image" content="/logos/FAB-logo.webp" alt="FAB Defense | Expect More"></meta>
-        <meta property="og:url" content="https://fabdefense.co.uk/products"></meta>
+        <meta property="og:url" content="https://fabdefense.co.uk/shop"></meta>
         <meta name="twitter:card" content="summary_large_image"></meta>
         <meta charSet="UTF-8"></meta>
       </Head>

@@ -34,7 +34,7 @@ const Nav = () => {
           </div>
           <div className="hidden lg:w-1/3 lg:flex lg:justify-center">
             <ul className="lg:flex lg:text-white lg:text-xl lg:font-bold lg:space-x-16">
-              <Link href="/products">
+              <Link href="/shop">
                 <a>
                   <li className="lg:hover:text-fabred">SHOP</li>
                 </a>
