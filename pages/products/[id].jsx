@@ -154,9 +154,9 @@ const Product = (props) => {
   // Return Matrix Item
   if (item.itemMatrixID != 0) {
     return (
-      <Layout title={item.description} description={`${item.ItemECommerce ? item.ItemECommerce.shortDescription : ''}`} image={product.image}>
+      <Layout>
         <Head>
-          <title className="uppercase">`${item.description} | FAB Defense (UK)`</title>
+          <title className="uppercase">{`${item.description} | FAB Defense (UK)`}</title>
           <meta name="description" content={item.description}></meta>
           <meta name="robots" content="index, follow"></meta>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
@@ -239,9 +239,9 @@ const Product = (props) => {
   // Return Single Item
   if (item.itemMatrixID == 0) {
     return (
-      <Layout title={product.name} description={product.shortDescription} image={product.image}>
+      <Layout>
         <Head>
-          <title className="uppercase">`${item.description} | FAB Defense (UK)`</title>
+          <title className="uppercase">{`${item.description} | FAB Defense (UK)`}</title>
           <meta name="description" content={item.description}></meta>
           <meta name="robots" content="index, follow"></meta>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
