@@ -43,8 +43,8 @@ const MatrixItem = ({ item, matrixItem, image, matrixLoading, handleInputChange,
       </Head>
       <div className="divide-y-4 divide-black divide-double">
         <div className="mx-8 my-12 lg:my-20 lg:mx-60">
-          <div className="flex justify-center">
-            <div className="w-1/2 p-2 flex justify-center">
+          <div className="flex flex-col lg:flex-row justify-center">
+            <div className="lg:w-1/2 p-2 flex justify-center">
               {matrixLoading &&
                 <img src="/loading.gif" alt="Loading spinner" />
               }
@@ -52,7 +52,7 @@ const MatrixItem = ({ item, matrixItem, image, matrixLoading, handleInputChange,
                 <ProductImage imageURL={matrixItem ? `${matrixItem.Images.Image.baseImageURL}/w_300/${matrixItem.Images.Image.publicID}.jpg` : `${item.Images.Image.baseImageURL}/w_300/${item.Images.Image.publicID}.jpg`} />
               }
             </div>
-            <div className="w-1/2 p-2">
+            <div className="lg:w-1/2 p-2">
               <h1 className="font-black text-3xl uppercase">{item.description}</h1>
               <p className="my-4 font-black text-3xl uppercase mb-2">{formatCurrencyString({
                 value: item.Prices.ItemPrice[0].amount.replace('.', ''),
