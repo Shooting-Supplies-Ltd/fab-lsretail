@@ -9,6 +9,9 @@ export async function getStaticPaths() {
   const res = await getItems()
   const data = await res.data.Item
   let IDs = []
+  
+  if (!data || data === undefined) return
+  
   data.map(item => {
     if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
       IDs.push(item.itemMatrixID)
@@ -17,9 +20,11 @@ export async function getStaticPaths() {
       IDs.push(item.itemID)
     }
   })
+  
   const paths = IDs.map(id => ({
     params: { id }
   }))
+  
   return { paths, fallback: true }
 }
 
