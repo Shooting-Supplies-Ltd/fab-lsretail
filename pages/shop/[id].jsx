@@ -32,14 +32,19 @@ export async function getStaticProps({ params: { id } }) {
   // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
   const res = await getItem(id)
   let item = await res.data.Item
+
+  if (!item || item === undefined) return 
+  
   if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
     const res = await getMatrixItem(id)
     item = await res.data.ItemMatrix
   }
+  
   if (item.manufacturerID != '55') {
     const res = await getMatrixItem(id)
     item = await res.data.ItemMatrix
   }
+  
   return {
     props: { item },
     revalidate: 10
