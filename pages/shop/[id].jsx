@@ -1,6 +1,3 @@
-import Link from 'next/link'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 import { getItem, getItems, getMatrixItem } from '../api/lightspeed'
 import { useShoppingCart } from 'use-shopping-cart'
@@ -46,9 +43,6 @@ export async function getStaticProps({ params: { id } }) {
 }
 
 const Product = ({ item }) => {
-  // Get path for meta url
-  const router = useRouter()
-
   // Set const for useRef to prevent useEffect on page load where needed.
   const loaded = useRef(false);
 

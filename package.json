@@ -30,7 +30,6 @@
     "stripe": "^8.91.0",
     "tailwindcss": "^2.0.1",
     "typeface-montserrat": "^1.1.13",
-    "use-shopping-cart": "^2.1.0",
-    "yarn": "^1.22.10"
+    "use-shopping-cart": "^2.1.0"
   }
 }
