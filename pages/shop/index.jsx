@@ -43,7 +43,7 @@ const Products = (props) => {
   }
 
   return (
-    <Layout title="Products">
+    <Layout>
       <Head>
         <title>Shop | FAB Defense (UK)</title>
         <link rel="canonical" href="https://fabdefense.co.uk/shop" />

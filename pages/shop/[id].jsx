@@ -7,10 +7,10 @@ import MatrixItem from '../../components/product/MatrixItem'
 
 export async function getStaticPaths() {
   const res = await getItems()
-  const data = await res.data.Item
+  const data = res.data.Item
   let IDs = []
   
-  if (!data || data === undefined) return
+  if (!data) return
   
   data.map(item => {
     if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
@@ -31,18 +31,18 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { id } }) {
   // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
   const res = await getItem(id)
-  let item = await res.data.Item
+  let item = res.data.Item
 
-  if (!item || item === undefined) return
+  if (!item) return
   
   if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
     const res = await getMatrixItem(id)
-    item = await res.data.ItemMatrix
+    item = res.data.ItemMatrix
   }
 
   if (item.manufacturerID != '55') {
     const res = await getMatrixItem(id)
-    item = await res.data.ItemMatrix
+    item = res.data.ItemMatrix
   }
   
   return {
