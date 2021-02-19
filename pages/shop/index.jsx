@@ -27,7 +27,7 @@ const Products = (props) => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', checkScrollTop)
+    return window.addEventListener('scroll', checkScrollTop)
   }, [showScroll])
 
   const scrollTop = () => {
