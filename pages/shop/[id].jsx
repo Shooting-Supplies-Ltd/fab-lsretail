@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { getItem, getItems, getMatrixItem } from '../api/lightspeed'
-import { useShoppingCart } from 'use-shopping-cart'
 
 import Layout from '../../components/Layout'
 import SingleItem from '../../components/product/SingleItem'
