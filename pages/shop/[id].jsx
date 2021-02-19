@@ -35,12 +35,12 @@ export async function getStaticProps({ params: { id } }) {
 
   if (!item || item === undefined) return
   
-  if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
+  if (item.manufacturerID != '55') {
     const res = await getMatrixItem(id)
     item = await res.data.ItemMatrix
   }
-  
-  if (item.manufacturerID != '55') {
+
+  if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
     const res = await getMatrixItem(id)
     item = await res.data.ItemMatrix
   }
