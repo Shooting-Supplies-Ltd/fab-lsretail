@@ -46,9 +46,6 @@ const Product = ({ item }) => {
   // Set const for useRef to prevent useEffect on page load where needed.
   const loaded = useRef(false);
 
-  // Add the shopping cart utilities
-  const { cartCount } = useShoppingCart()
-
   // State items
   const [image, setImage] = useState()
   const [checkedInputs, setCheckedInputs] = useState({})
