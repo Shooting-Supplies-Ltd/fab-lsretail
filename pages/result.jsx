@@ -108,7 +108,7 @@ ResultPage.getInitialProps = async ({ query, req }) => {
         },
         body: JSON.stringify({
           "name": "FAB Order",
-          "to": [{ "name": "Antony", "email": "info@shootingsuppliesltd.co.uk" }],
+          "to": [{ "name": "Antony", "email": "info@shootingsuppliesltd.co.uk" }, { "name": "Darryl", "email": "darryl@shootingsuppliesltd.co.uk" }],
           "sender": { "name": "FAB Defense", "email": "noreply@fabdefense.co.uk" },
           "subject": "New FAB Web Order",
           "htmlContent":
