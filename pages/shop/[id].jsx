@@ -33,7 +33,7 @@ export async function getStaticProps({ params: { id } }) {
   const res = await getItem(id)
   let item = await res.data.Item
 
-  if (!item || item === undefined) return 
+  if (!item || item === undefined) return
   
   if (item.manufacturerID === '55' && item.itemMatrixID != '0') {
     const res = await getMatrixItem(id)
