@@ -1,3 +1,5 @@
+// @ts-check
+
 import { useState, useEffect, useRef } from 'react'
 import { getItem, getItems, getMatrixItem } from '../api/lightspeed'
 

@@ -1,3 +1,4 @@
+// @ts-check
 const axios = require('axios')
 const lightspeedApi = "https://api.lightspeedapp.com/API";
 import NodeCache from 'node-cache'
@@ -5,7 +6,7 @@ import NodeCache from 'node-cache'
 const tokenCache = new NodeCache()
 let token = null
 
-const refreshToken = async () => {
+export async function refreshToken() {
   const body = {
     grant_type: "refresh_token",
     client_id: process.env.LIGHTSPEED_ID,
@@ -43,5 +44,3 @@ const refreshToken = async () => {
     }
   }
 };
-
-module.exports = refreshToken

@@ -1,5 +1,6 @@
+// @ts-check
 import axios from 'axios'
-import refreshToken from './refreshToken'
+import {refreshToken} from './refreshToken'
 import rateLimit from 'axios-rate-limit';
 
 async function getHeader() {
@@ -26,23 +27,27 @@ export async function getDelivery() {
 
 export async function getItems() {
   let axiosConfig = await getHeader()
-  return http.get(`Item.json?manufacturerID=55&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  const items = await http.get(`Item.json?manufacturerID=55&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  return items
 }
 
 export async function getItem(itemID) {
   let axiosConfig = await getHeader()
-  return http.get(`Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  const item = await http.get(`Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  return item
 }
 
 export async function getMatrixItems() {
   let axiosConfig = await getHeader()
-  return http.get(`ItemMatrix.json?manufacturerID=55&load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig)
+  const matrixItems = await http.get(`ItemMatrix.json?manufacturerID=55&load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig)
   .catch(err => console.error(err.data))
+  return matrixItems
 }
 
 export async function getMatrixItem(itemID) {
   let axiosConfig = await getHeader()
-  return http.get(`ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  const matrixItem = await http.get(`ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig).catch(err => console.error(err.data))
+  return matrixItem
 }
 
 export async function createSale(newSale) {

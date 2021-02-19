@@ -1,3 +1,4 @@
+// @ts-check
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { getCategories, getItems, getMatrixItems } from '../api/lightspeed'
