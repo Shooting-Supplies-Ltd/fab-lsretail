@@ -9,8 +9,8 @@ const Contact = () => {
       </Head>
       <main className="mx-8 my-8 lg:my-12 lg:mx-96 lg:px-40">
         <h2 className="mb-1 lg:mb-4 font-bold lg:text-2xl">Contact Us</h2>
-        <p className="text-sm lg:text-base">Tel: 01527831261</p>
-        <p className="text-sm lg:text-base">Email: info@shootingsuppliesltd.co.uk</p>
+        <p className="text-sm lg:text-base hover:text-fabred">Tel: <a href="tel:01527831261">01527831261</a></p>
+        <p className="text-sm lg:text-base hover:text-fabred">Email: <a href="mailto:info@shootingsuppliesltd.co.uk">info@shootingsuppliesltd.co.uk</a></p>
         <p className="text-sm lg:text-base">Address: 38, Sherwood Road, Bromsgrove, B60 3DR</p>
         <hr className="my-4" />
         <h3 className="mb-1 lg:mb-4 font-bold lg:text-2xl">Opening Times</h3>
