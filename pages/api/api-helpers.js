@@ -55,3 +55,46 @@ export async function getInventory() {
   })
   return products
 }
+
+export async function sendEmailConfirmation(stripeSessionData, saleID) {
+  const emailLineItems = stripeSessionData.line_items.data.map(line => {
+    return (
+      `<p><strong>Description:</strong> ${line.description} - <strong>Qty:</strong> ${line.quantity}</p>`
+    )
+  })
+
+  try {
+    const res = fetch('https://api.sendinblue.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': process.env.EMAIL_API,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "name": "FAB Order",
+        "to": [{ "name": "Antony", "email": "info@shootingsuppliesltd.co.uk" }, { "name": "Darryl", "email": "darryl@shootingsuppliesltd.co.uk" }],
+        "sender": { "name": "FAB Defense", "email": "noreply@fabdefense.co.uk" },
+        "subject": "New FAB Web Order",
+        "htmlContent":
+          `<html>
+            <body style="background-color: black; color: white;">
+              <h1>You Have Received a New Order</h1>
+              <h3>Order Detail</h3>
+              <p><strong>Sale ID:</strong><span>${saleID}</span></p>
+              <p><strong>Customer Email:</strong><span>${stripeSessionData.payment_intent.charges.data[0].billing_details.email}</span></p>
+              <p><strong>Order Items:</strong><span>${emailLineItems}</span></p>
+              <address>
+              <p><strong>Delivery Address</strong></p>
+              <p>${stripeSessionData.shipping.address.line1}</p>
+              <p>${stripeSessionData.shipping.address.line2}</p>
+              <p>${stripeSessionData.shipping.address.city}</p>
+              <p>${stripeSessionData.shipping.address.postal_code}</p>
+              </address>
+            </body>
+          </html>`
+      })
+    }).catch(err => console.error(err))
+  } catch (err) {
+    if (err) console.log(err)
+  }
+}

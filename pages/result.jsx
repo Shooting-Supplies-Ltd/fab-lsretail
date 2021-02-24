@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
-import PrintObject from '../components/PrintObject'
 import { createSale } from '../pages/api/lightspeed'
 import { useShoppingCart } from 'use-shopping-cart'
 import { parseCookies, destroyCookie } from 'nookies'
+import { sendEmailConfirmation } from './api/api-helpers'
 import Head from 'next/head'
 
 const ResultPage = (props) => {
@@ -79,63 +79,16 @@ ResultPage.getInitialProps = async ({ query, req }) => {
         "SalePayments": {
           "SalePayment": {
             "amount": parseFloat(parseCartDetails.formattedTotalPrice.replace('£', '')),
-            "paymentTypeID": 1
+            "paymentTypeID": 9
           }
         }
       }
 
       await createSale(sale).then(res => {
         saleID = res.data.Sale.saleID
-      })
+      }).then(sendEmailConfirmation(stripeSessionData, saleID))
     }
   }
-
-
-
-  const sendEmailConfirmation = async () => {
-    const emailLineItems = stripeSessionData.line_items.data.map(line => {
-      return (
-        `<p><strong>Description:</strong> ${line.description} - <strong>Qty:</strong> ${line.quantity}</p>`
-      )
-    })
-
-    try {
-      const res = fetch('https://api.sendinblue.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'api-key': process.env.EMAIL_API,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "name": "FAB Order",
-          "to": [{ "name": "Antony", "email": "info@shootingsuppliesltd.co.uk" }, { "name": "Darryl", "email": "darryl@shootingsuppliesltd.co.uk" }],
-          "sender": { "name": "FAB Defense", "email": "noreply@fabdefense.co.uk" },
-          "subject": "New FAB Web Order",
-          "htmlContent":
-            `<html>
-              <body style="background-color: black; color: white;">
-                <h1>You Have Received a New Order</h1>
-                <h3>Order Detail</h3>
-                <p><strong>Sale ID:</strong><span>${saleID}</span></p>
-                <p><strong>Customer Email:</strong><span>${stripeSessionData.payment_intent.charges.data[0].billing_details.email}</span></p>
-                <p><strong>Order Items:</strong><span>${emailLineItems}</span></p>
-                <address>
-                <p><strong>Delivery Address</strong></p>
-                <p>${stripeSessionData.shipping.address.line1}</p>
-                <p>${stripeSessionData.shipping.address.line2}</p>
-                <p>${stripeSessionData.shipping.address.city}</p>
-                <p>${stripeSessionData.shipping.address.postal_code}</p>
-                </address>
-              </body>
-            </html>`
-        })
-      })
-    } catch (err) {
-      if (err) console.log(err)
-    }
-  }
-
-  sendEmailConfirmation()
 
   return {
     props: {
