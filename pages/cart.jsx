@@ -4,6 +4,7 @@ import { fetchPostJSON } from './api/api-helpers'
 import CartItems from '../components/cart/CartItems'
 import { setCookie, destroyCookie } from 'nookies'
 import Layout from '../components/Layout'
+import NProgress from 'nprogress';
 import Head from 'next/head'
 
 const Cart = () => {
@@ -82,6 +83,7 @@ const Cart = () => {
 
   const handleCheckout = async (event) => {
     event.preventDefault()
+    NProgress.start()
     setCookie(null, 'cart', JSON.stringify({ cartDetails, formattedTotalPrice }), { path: '/' })
 
     const response = await fetchPostJSON(

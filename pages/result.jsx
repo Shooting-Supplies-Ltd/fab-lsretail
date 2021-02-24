@@ -99,5 +99,4 @@ ResultPage.getInitialProps = async ({ query, req }) => {
   }
 }
 
-
 export default ResultPage
