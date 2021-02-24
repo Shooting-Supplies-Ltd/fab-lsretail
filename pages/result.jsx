@@ -4,6 +4,7 @@ import { createSale } from '../pages/api/lightspeed'
 import { useShoppingCart } from 'use-shopping-cart'
 import { parseCookies, destroyCookie } from 'nookies'
 import { sendEmailConfirmation } from './api/api-helpers'
+import PrintObject from '../components/PrintObject'
 import Head from 'next/head'
 
 const ResultPage = (props) => {
@@ -27,8 +28,8 @@ const ResultPage = (props) => {
           <h1 className="text-4xl font-bold">Thankyou for your order!</h1>
           <h2 className="lg:text-2xl lg:mt-4 font-semibold">Your order reference is:  {saleID}</h2>
           <p className="lg:text-xl lg:mt-4">Please allow up to 3 working days for delivery of your item.</p>
-          {/* <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2> */}
-          {/* <h3>CheckoutSession response:</h3>
+          {/* <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
+          <h3>CheckoutSession response:</h3>
           <PrintObject content={data ?? 'loading...'} /> */}
         </div>
       </Layout>
