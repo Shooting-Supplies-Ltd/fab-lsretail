@@ -42,7 +42,7 @@ export async function getItem(itemID) {
   const axiosConfig = await getHeader();
   const item = await http
     .get(
-      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`,
+      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
       axiosConfig
     )
     .catch((err) => console.error(err.data));
@@ -63,7 +63,10 @@ export async function getMatrixItems() {
 export async function getMatrixItem(itemID) {
   const axiosConfig = await getHeader();
   const matrixItem = await http
-    .get(`ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig)
+    .get(
+      `ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
+      axiosConfig
+    )
     .catch((err) => console.error(err.data));
   return matrixItem;
 }
