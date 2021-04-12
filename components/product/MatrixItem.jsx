@@ -55,6 +55,7 @@ const MatrixItem = ({ item, matrixItem, image, matrixLoading, handleInputChange,
               name: item.description,
               description: item.ItemECommerce.shortDescription.replace(/(<([^>]+)>)/gi, ''),
               brand: 'FAB Defense',
+              sku: `${item.customSku}`,
               offers: {
                 '@type': 'Offer',
                 url: `https://shootingsuppliesltd.co.uk${router.asPath}`,
