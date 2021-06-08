@@ -2,6 +2,7 @@
 import axios from 'axios';
 import rateLimit from 'axios-rate-limit';
 import { refreshToken } from './refreshToken';
+import {sendErrorEmail} from './api-helpers'
 
 async function getHeader() {
   const token = await refreshToken();
@@ -72,8 +73,9 @@ export async function createSale(newSale) {
   const axiosConfig = await getHeader();
   return http
     .post(`Sale.json`, newSale, axiosConfig)
-    .catch((error) => console.error(error.data).then((res) => res))
-    .catch((err) => console.error(err.data));
+    .catch((error) => {
+      sendErrorEmail(error)
+    })
 }
 
 export async function getCategories(categoryID) {

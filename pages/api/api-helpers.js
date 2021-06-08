@@ -95,7 +95,34 @@ export async function sendEmailConfirmation(stripeSessionData, saleID) {
             </body>
           </html>`
       })
-    }).catch(err => console.error(err))
+    })
+  } catch (err) {
+    if (err) console.log(err)
+  }
+}
+
+export async function sendErrorEmail(error) {
+  try {
+    const res = fetch('https://api.sendinblue.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': process.env.EMAIL_API,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "name": "FAB Error",
+        "to": [{ "name": "Darryl", "email": "darryl@shootingsuppliesltd.co.uk" }],
+        "sender": { "name": "FAB Defense", "email": "noreply@fabdefense.co.uk" },
+        "subject": "New FAB Web Error",
+        "htmlContent":
+          `<html>
+            <body style="background-color: black; color: white;">
+              <h1>Oh Oh Something Went Wrong!</h1>
+              <span>${error}</span>
+            </body>
+          </html>`
+      })
+    })
   } catch (err) {
     if (err) console.log(err)
   }
