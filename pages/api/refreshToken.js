@@ -1,10 +1,10 @@
 // @ts-check
-const axios = require('axios')
+const axios = require("axios");
 const lightspeedApi = "https://api.lightspeedapp.com/API";
-import NodeCache from 'node-cache'
+import NodeCache from "node-cache";
 
-const tokenCache = new NodeCache()
-let token = null
+const tokenCache = new NodeCache();
+let token = null;
 
 export async function refreshToken() {
   const body = {
@@ -14,11 +14,11 @@ export async function refreshToken() {
     refresh_token: process.env.LIGHTSPEED_REFRESH_TOKEN,
   };
 
-  const cachedToken = await tokenCache.get('tokenData')
+  const cachedToken = await tokenCache.get("tokenData");
 
   if (cachedToken != undefined && cachedToken.expires_in > 30) {
-    token = cachedToken.access_token
-    return token
+    token = cachedToken.access_token;
+    return token;
   }
 
   if (cachedToken === undefined || cachedToken.expires_in < 30) {
@@ -32,15 +32,21 @@ export async function refreshToken() {
         data: JSON.stringify(body),
       });
 
-      const tokenData = await response.data
+      const tokenData = await response.data;
 
-      tokenCache.set('tokenData', tokenData, { checkperiod: tokenData.expires_in })
+      tokenCache.set("tokenData", tokenData, {
+        checkperiod: tokenData.expires_in,
+      });
 
-      token = tokenData.access_token
+      token = tokenData.access_token;
 
       return token;
     } catch (error) {
-      if (error) console.error("We have a problem! Could not get token.", error.data);
+      if (error)
+        console.error(
+          "We have a problem! Could not get token.",
+          error.response.data
+        );
     }
   }
-};
+}
