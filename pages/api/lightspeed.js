@@ -1,8 +1,8 @@
 // @ts-check
-import axios from 'axios';
-import rateLimit from 'axios-rate-limit';
-import { refreshToken } from './refreshToken';
-import {sendErrorEmail} from './api-helpers'
+import axios from "axios";
+import rateLimit from "axios-rate-limit";
+import { refreshToken } from "./refreshToken";
+import { sendErrorEmail } from "./api-helpers";
 
 async function getHeader() {
   const token = await refreshToken();
@@ -19,12 +19,19 @@ async function getHeader() {
   return axiosConfig;
 }
 
-const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 2000, maxRPS: 1 });
+const http = rateLimit(axios.create(), {
+  maxRequests: 1,
+  perMilliseconds: 2000,
+  maxRPS: 1,
+});
 
 export async function getDelivery() {
   const axiosConfig = await getHeader();
   return http
-    .get(`Item.json?itemID=7051&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]`, axiosConfig)
+    .get(
+      `Item.json?itemID=7051&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]`,
+      axiosConfig
+    )
     .catch((err) => console.error(err.data));
 }
 
@@ -43,7 +50,7 @@ export async function getItem(itemID) {
   const axiosConfig = await getHeader();
   const item = await http
     .get(
-      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`,
+      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
       axiosConfig
     )
     .catch((err) => console.error(err.data));
@@ -64,18 +71,19 @@ export async function getMatrixItems() {
 export async function getMatrixItem(itemID) {
   const axiosConfig = await getHeader();
   const matrixItem = await http
-    .get(`ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]`, axiosConfig)
+    .get(
+      `ItemMatrix/${itemID}.json?load_relations=["Category", "Images", "Items", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
+      axiosConfig
+    )
     .catch((err) => console.error(err.data));
   return matrixItem;
 }
 
 export async function createSale(newSale) {
   const axiosConfig = await getHeader();
-  return http
-    .post(`Sale.json`, newSale, axiosConfig)
-    .catch((error) => {
-      sendErrorEmail(error)
-    })
+  return http.post(`Sale.json`, newSale, axiosConfig).catch((error) => {
+    sendErrorEmail(error);
+  });
 }
 
 export async function getCategories(categoryID) {
