@@ -50,7 +50,7 @@ export async function getItem(itemID) {
   const axiosConfig = await getHeader();
   const item = await http
     .get(
-      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
+      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`,
       axiosConfig
     )
     .catch((err) => console.error(err.data));
