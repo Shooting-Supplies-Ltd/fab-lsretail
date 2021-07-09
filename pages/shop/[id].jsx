@@ -5,39 +5,41 @@ import Layout from "../../components/Layout";
 import SingleItem from "../../components/product/SingleItem";
 import MatrixItem from "../../components/product/MatrixItem";
 
-export async function getStaticPaths() {
-  const res = await getItems();
-  const data = await res.data.Item;
-  let IDs = [];
+// export async function getStaticPaths() {
+//   const res = await getItems();
+//   const data = await res.data.Item;
+//   let IDs = [];
 
-  if (!data) return;
+//   if (!data) return;
 
-  data.map((item) => {
-    if (item.manufacturerID === "55" && item.itemMatrixID != "0") {
-      IDs.push(item.itemMatrixID);
-    }
-    if (item.itemMatrixID === "0") {
-      IDs.push(item.itemID);
-    }
-  });
+//   data.map((item) => {
+//     if (item.manufacturerID === "55" && item.itemMatrixID != "0") {
+//       IDs.push(item.itemMatrixID);
+//     }
+//     if (item.itemMatrixID === "0") {
+//       IDs.push(item.itemID);
+//     }
+//   });
 
-  const paths = IDs.map((id) => ({
-    params: { id },
-  }));
+//   const paths = IDs.map((id) => ({
+//     params: { id },
+//   }));
 
-  return { paths, fallback: true };
-}
+//   return { paths, fallback: true };
+// }
 
-export async function getStaticProps({ params: { id } }) {
+export async function getServerSideProps({ res, query }) {
+  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
+  const id = query.id;
   // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
-  const res = await getItem(id);
-  let item = res.data.Item;
+  const fetchItem = await getItem(id);
+  let item = fetchItem.data.Item;
 
   if (!item) return;
 
   if (item.manufacturerID === "55" && item.itemMatrixID != "0") {
-    const res = await getMatrixItem(id);
-    item = res.data.ItemMatrix;
+    const fetchMatrixItem = await getMatrixItem(id);
+    item = fetchMatrixItem.data.ItemMatrix;
   }
 
   if (item.manufacturerID != "55") {
@@ -47,7 +49,6 @@ export async function getStaticProps({ params: { id } }) {
 
   return {
     props: { item },
-    revalidate: 10,
   };
 }
 
