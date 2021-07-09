@@ -1,5 +1,5 @@
-// @ts-check
-import api from "./limit";
+import axios from "axios";
+import rateLimit from "axios-rate-limit";
 import refreshToken from "./refreshToken";
 import { sendErrorEmail } from "./api-helpers";
 
@@ -18,7 +18,11 @@ async function getHeader() {
   return axiosConfig;
 }
 
-const http = api;
+const http = rateLimit(axios.create(), {
+  maxRequests: 1,
+  perMilliseconds: 1000,
+  maxRPS: 1,
+});
 
 export async function getDelivery() {
   const axiosConfig = await getHeader();
