@@ -1,7 +1,6 @@
 // @ts-check
-import axios from "axios";
-import rateLimit from "axios-rate-limit";
-import { refreshToken } from "./refreshToken";
+import api from "./limit";
+import refreshToken from "./refreshToken";
 import { sendErrorEmail } from "./api-helpers";
 
 async function getHeader() {
@@ -19,11 +18,7 @@ async function getHeader() {
   return axiosConfig;
 }
 
-const http = rateLimit(axios.create(), {
-  maxRequests: 1,
-  perMilliseconds: 2000,
-  maxRPS: 1,
-});
+const http = api;
 
 export async function getDelivery() {
   const axiosConfig = await getHeader();
@@ -61,7 +56,7 @@ export async function getItem(itemID) {
   const axiosConfig = await getHeader();
   const item = await http
     .get(
-      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]`,
+      `Item/${itemID}.json?load_relations=["Category", "Images", "ItemShops", "CustomFieldValues", "ItemECommerce"]&CustomFieldValues.customFieldID=7`,
       axiosConfig
     )
     .catch((err) => console.error(err.data));

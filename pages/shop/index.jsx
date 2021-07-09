@@ -189,19 +189,6 @@ export async function getStaticProps() {
     )
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  console.log(categories);
-
-  // Get & Sort Category Data
-  // const categoriesToFetch = [];
-
-  // const findCategories = items.Item.map((item) => {
-  //   categoriesToFetch.push(item.categoryID);
-  // });
-
-  // const categoryData = await getCategories(categoriesToFetch);
-  // const categories = await categoryData.data;
-  // console.log(categories);
-
   return {
     props: {
       singleItems,
