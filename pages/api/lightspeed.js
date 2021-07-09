@@ -39,7 +39,18 @@ export async function getItems() {
   const axiosConfig = await getHeader();
   const items = await http
     .get(
-      `Item.json?manufacturerID=55&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]&ItemECommerce.listOnStore=true`,
+      `Item.json?manufacturerID=55&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]&CustomFieldValues.customFieldID=7`,
+      axiosConfig
+    )
+    .catch((err) => console.error(err.data));
+  return items;
+}
+
+export async function getItemsOffset() {
+  const axiosConfig = await getHeader();
+  const items = await http
+    .get(
+      `Item.json?manufacturerID=55&load_relations=["Category", "Images", "ItemShops", "ItemECommerce"]&offset=100&CustomFieldValues.customFieldID=7`,
       axiosConfig
     )
     .catch((err) => console.error(err.data));
