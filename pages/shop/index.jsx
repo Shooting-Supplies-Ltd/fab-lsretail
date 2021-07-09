@@ -72,7 +72,7 @@ const Products = (props) => {
         <meta property="og:title" content="Shop | FAB Defense (UK) Ltd"></meta>
         <meta
           property="og:description"
-          content="Shop FAB Defense Grips & Accessories, Filter by Category"
+          content="Shop FAB Defense Grips, Buttstocks & Accessories"
         ></meta>
         <meta
           property="og:image"
