@@ -1,51 +1,25 @@
 import { useState, useEffect, useRef } from "react";
-import { getItem, getItems, getMatrixItem } from "../api/lightspeed";
+import { getItem, getMatrixItem } from "../api/lightspeed";
 
 import Layout from "../../components/Layout";
 import SingleItem from "../../components/product/SingleItem";
 import MatrixItem from "../../components/product/MatrixItem";
 
-// export async function getStaticPaths() {
-//   const res = await getItems();
-//   const data = await res.data.Item;
-//   let IDs = [];
-
-//   if (!data) return;
-
-//   data.map((item) => {
-//     if (item.manufacturerID === "55" && item.itemMatrixID != "0") {
-//       IDs.push(item.itemMatrixID);
-//     }
-//     if (item.itemMatrixID === "0") {
-//       IDs.push(item.itemID);
-//     }
-//   });
-
-//   const paths = IDs.map((id) => ({
-//     params: { id },
-//   }));
-
-//   return { paths, fallback: true };
-// }
-
 export async function getServerSideProps({ res, query }) {
   res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
   const id = query.id;
-  // Get Item using ID and check if it is a FAB Item, Matrix or Single Item
+
+  if (query.matrix) {
+    const fetchMatrixItem = await getMatrixItem(id);
+    const item = fetchMatrixItem.data.ItemMatrix;
+
+    return {
+      props: { item },
+    };
+  }
+
   const fetchItem = await getItem(id);
   let item = fetchItem.data.Item;
-
-  if (!item) return;
-
-  if (item.manufacturerID === "55" && item.itemMatrixID != "0") {
-    const fetchMatrixItem = await getMatrixItem(id);
-    item = fetchMatrixItem.data.ItemMatrix;
-  }
-
-  if (item.manufacturerID != "55") {
-    const res = await getMatrixItem(id);
-    item = res.data.ItemMatrix;
-  }
 
   return {
     props: { item },
